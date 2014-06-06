@@ -1,0 +1,851 @@
+<!DOCTYPE html >
+<html>
+<head>
+<title>Geostat Summer School</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="copyright" content="Copyright &#169; 2014 Barry Rowlingson, Lancaster University" />
+<meta name="font-size-adjustment" content="-2" />
+<link rel="stylesheet" href="styles/slidy.css" type="text/css" />
+<link rel="stylesheet" href="styles/w3c-blue.css" type="text/css" />
+<link rel="stylesheet" href="styles/prism.css" type="text/css" />
+<script src="scripts/slidy.js" charset="utf-8" type="text/javascript">
+</script>
+</head>
+<body>
+<div class="background">
+  <img alt="" id="head-icon" src="graphics/clogo.png" />
+  <img alt="W3C logo" id="head-logo" src="graphics/lulogo.png" />
+</div>
+
+<div class="background slanty">
+<img src="graphics/w3c-logo-slanted.jpg" alt="slanted W3C logo" />
+</div>
+
+<div class="slide cover title">
+ <img alt="Lancaster University" class="cover" src="graphics/lulogo.png"/>
+ <br clear="all"/>
+ <h1>
+  GeoPython
+ </h1>
+ <h2>
+  Your Python Starter...
+ </h2>
+</div>
+<div class="slide">
+ <h1>
+  Python?
+ </h1>
+ <h2>
+  Its easy!
+ </h2>
+ <div class="vbox">
+ </div>
+ <div class="hbox">
+  <img class="screeny" src="graphics/geopython/python.png"/>
+ </div>
+</div>
+<div class="slide">
+ <h1>
+  Its like R
+ </h1>
+ <h2>
+  Like this:
+ </h2>
+ <pre>
+<code class="language-python" id="simple1">&gt;&gt;&gt;  x = 1
+&gt;&gt;&gt;  y = 4
+&gt;&gt;&gt;  x * y
+4
+&gt;&gt;&gt;  x + y
+5</code>
+</pre>
+ <h2>
+  Not like this though:
+ </h2>
+ <pre><code class="language-python" id="sumfail">&gt;&gt;&gt;  x = [1, 2, 3]
+&gt;&gt;&gt;  y = 3 + x
+Traceback (most recent call last):
+  File "&lt;console&gt;", line 1, in &lt;module&gt;
+TypeError: unsupported operand type(s) for +: 'int' and 'list'</code>
+</pre>
+ <h2>
+  Like this:
+ </h2>
+ <pre><code class="language-python" id="sumwork">&gt;&gt;&gt;  x = [1, 2, 3]
+&gt;&gt;&gt;  y = [3 + z for z in x]
+&gt;&gt;&gt;  y
+[4, 5, 6]</code>
+</pre>
+</div>
+<div class="slide">
+ <h1>
+  Functions
+ </h1>
+ <h2>
+  def
+ </h2>
+ <ul>
+  <li>
+   Define functions:
+   <pre><code class="language-python" id="deffuns">&gt;&gt;&gt;  def poly(x, a, b, c):
+...    y = [a * z**2 + b * z + c for z in x]
+...    return y
+...</code></pre>
+  </li>
+  <li>
+   Call functions:
+   <pre><code class="language-python" id="callfuns">&gt;&gt;&gt;  poly([1,2,3], 2,-1,3)
+[4, 9, 18]
+&gt;&gt;&gt;  
+&gt;&gt;&gt;  poly([1,2,3], a=2, b=-1, c=3)
+[4, 9, 18]
+&gt;&gt;&gt;  
+&gt;&gt;&gt;  poly([1,2,3], c=2, b=-1, 3)
+  File "&lt;console&gt;", line 1
+SyntaxError: non-keyword arg after keyword arg
+&gt;&gt;&gt;  
+&gt;&gt;&gt;  poly([1,2,3], 2, b=-1, c=3)
+[4, 9, 18]</code>
+</pre>
+  </li>
+ </ul>
+</div>
+<div class="slide">
+ <h1>
+  Args
+ </h1>
+ <h2>
+  Defaults etc...
+ </h2>
+ <pre>
+<code class="language-python" id="fofoofo">&gt;&gt;&gt;  def foo(myparameter=99):
+...     return myparameter*2
+...  
+&gt;&gt;&gt;  foo()
+198
+&gt;&gt;&gt;  foo(100)
+200
+&gt;&gt;&gt;  foo(myp=100)
+Traceback (most recent call last):
+  File "&lt;console&gt;", line 1, in &lt;module&gt;
+TypeError: foo() got an unexpected keyword argument 'myp'
+&gt;&gt;&gt;  foo(myparameter=100)
+200
+&gt;&gt;&gt;  foo(myparameterandabit=100)
+Traceback (most recent call last):
+  File "&lt;console&gt;", line 1, in &lt;module&gt;
+TypeError: foo() got an unexpected keyword argument 'myparameterandabit'</code>
+</pre>
+</div>
+<div class="slide">
+ <h1>
+  imports
+ </h1>
+ <h2>
+  get code from files
+ </h2>
+ <pre><code class="language-python asis" id="samplesss">
+#
+# this is samples.py in my working directory
+#
+def bar(x):
+  return x*2
+
+def baz(x):
+  return x*3
+</code>
+</pre>
+ <pre><code class="language-python" id="usingit">&gt;&gt;&gt;  import samples
+&gt;&gt;&gt;  samples.bar(99)
+198
+&gt;&gt;&gt;  
+&gt;&gt;&gt;  from samples import baz
+&gt;&gt;&gt;  baz(100)
+300</code>
+</pre>
+</div>
+<div class="slide">
+ <h1>
+  Library Modules
+ </h1>
+ <h2>
+  Get installed module code
+ </h2>
+ <pre><code class="language-python" id="libmods">&gt;&gt;&gt;  import os
+&gt;&gt;&gt;  os.path.realpath(".")
+'/home/rowlings/Work/Teaching/GeostatSummerSchool/2014/Site/testing'
+&gt;&gt;&gt;  os.path.join("foo","bar","baz")
+'foo/bar/baz'
+&gt;&gt;&gt;  os.uname()
+('Linux', 'barry-OptiPlex-755', '3.8.0-31-generic', '#46-Ubuntu SMP Tue Sep 10 20:03:44 UTC 2013', 'x86_64')</code>
+</pre>
+</div>
+<div class="slide">
+ <h1>
+  Help!
+ </h1>
+ <h2>
+  How to get help
+ </h2>
+ <pre><code class="language-python" id="halp">&gt;&gt;&gt;  help(os.uname)
+Help on built-in function uname in module posix:
+
+uname(...)
+    uname() -&gt; (sysname, nodename, release, version, machine)
+    
+    Return a tuple identifying the current operating system.</code>
+</pre>
+ <p>
+  Unlike R, most objects supply help!
+ </p>
+</div>
+<div class="slide">
+ <h1>
+  Methods
+ </h1>
+ <h2>
+  What can I do with X?
+ </h2>
+ <pre><code class="language-python" id="dowhat">&gt;&gt;&gt;  x="hello world"
+&gt;&gt;&gt;  dir(x)
+['__add__', '__class__', '__contains__', '__delattr__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs__', '__getslice__', '__gt__', '__hash__', '__init__', '__le__', '__len__', '__lt__', '__mod__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__rmod__', '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '_formatter_field_name_split', '_formatter_parser', 'capitalize', 'center', 'count', 'decode', 'encode', 'endswith', 'expandtabs', 'find', 'format', 'index', 'isalnum', 'isalpha', 'isdigit', 'islower', 'isspace', 'istitle', 'isupper', 'join', 'ljust', 'lower', 'lstrip', 'partition', 'replace', 'rfind', 'rindex', 'rjust', 'rpartition', 'rsplit', 'rstrip', 'split', 'splitlines', 'startswith', 'strip', 'swapcase', 'title', 'translate', 'upper', 'zfill']
+&gt;&gt;&gt;  x.title()
+'Hello World'
+&gt;&gt;&gt;  x.upper()
+'HELLO WORLD'
+&gt;&gt;&gt;  x.split()
+['hello', 'world']</code>
+</pre>
+</div>
+<div class="slide">
+ <h1>
+  Python Objects
+ </h1>
+ <h2>
+  Lots of things are objects
+ </h2>
+ <ul>
+  <li>
+   <code>
+    x = "hello world"
+   </code>
+   creates an object
+   <code>
+    x
+   </code>
+  </li>
+  <li>
+   <code>
+    x.split()
+   </code>
+   runs the
+   <code>
+    split
+   </code>
+   "method" on
+   <code>
+    x
+   </code>
+   , returns a list.
+   <code>
+    x
+   </code>
+   doesn't change...
+  </li>
+  <li>
+   but methods
+   <em>
+    can
+   </em>
+   change the object they run on.
+   <pre>
+<code class="language-python" id="sorts">&gt;&gt;&gt;  z = [9,6,2,3]
+&gt;&gt;&gt;  z.sort()
+&gt;&gt;&gt;  z
+[2, 3, 6, 9]</code>
+</pre>
+  </li>
+  <li>
+   They can return a value
+   <em>
+    and
+   </em>
+   change the object:
+   <pre>
+<code class="language-python" id="pops">&gt;&gt;&gt;  last = z.pop()
+&gt;&gt;&gt;  last
+9
+&gt;&gt;&gt;  z
+[2, 3, 6]</code>
+</pre>
+  </li>
+ </ul>
+</div>
+<div class="slide">
+ <h1>
+  A sample class
+ </h1>
+ <h2>
+  Point object
+ </h2>
+ <pre>
+<code class="language-python" id="pointsdef">&gt;&gt;&gt;  class Point(object):
+...    def __init__(self,x,y):
+...      self.x = x
+...      self.y = y
+...    def coord(self):
+...      return [self.x, self.y]
+...    def shift(self, dx, dy):
+...      self.x = self.x + dx
+...      self.y = self.y + dy
+...  
+&gt;&gt;&gt;  p = Point(2.4, 4.5)
+&gt;&gt;&gt;  
+&gt;&gt;&gt;  p.x
+2.4
+&gt;&gt;&gt;  
+&gt;&gt;&gt;  p.coord()
+[2.4, 4.5]
+&gt;&gt;&gt;  
+&gt;&gt;&gt;  p.shift(1000,2000)
+&gt;&gt;&gt;  p.coord()
+[1002.4, 2004.5]
+&gt;&gt;&gt;</code>
+</pre>
+</div>
+<div class="slide">
+ <h1>
+  Distance
+ </h1>
+ <h2>
+  Pythagoras
+ </h2>
+ <pre>
+<code class="language-python" id="pythag">&gt;&gt;&gt;  import math
+&gt;&gt;&gt;  def pythagoras(p0, p1):
+...     return math.sqrt((p1.x-p0.x)**2 + (p1.y-p0.y)**2)
+...  
+&gt;&gt;&gt;  pythagoras(Point(0,0),Point(3,4))
+5.0</code>
+</pre>
+</div>
+<div class="slide">
+ <h1>
+  Sphere Distance
+ </h1>
+ <h2>
+  Spherical Distance
+ </h2>
+ <pre>
+<code class="language-python" id="spherdist">&gt;&gt;&gt;  # From: https://gist.github.com/gabesmed/1826175
+&gt;&gt;&gt;  
+&gt;&gt;&gt;  EARTH_RADIUS = 6378137 # radius in metres
+&gt;&gt;&gt;  
+&gt;&gt;&gt;  points = [
+...             Point(40.750307,-73.994819),
+...             Point(40.749641,-73.99527)
+...           ]
+&gt;&gt;&gt;  
+&gt;&gt;&gt;  def great_circle_distance(latlong_a, latlong_b):
+...      lat1, lon1 = latlong_a.coord()
+...      lat2, lon2 = latlong_b.coord()
+...   
+...      dLat = math.radians(lat2 - lat1)
+...      dLon = math.radians(lon2 - lon1)
+...      a = (math.sin(dLat / 2) * math.sin(dLat / 2) +
+...              math.cos(math.radians(lat1)) * math.cos(math.radians(lat2)) * 
+...              math.sin(dLon / 2) * math.sin(dLon / 2))
+...      c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+...      d = EARTH_RADIUS * c
+...      
+...      return d
+...  
+&gt;&gt;&gt;  great_circle_distance(points[0], points[1])
+83.32536285505579</code>
+</pre>
+</div>
+<div class="slide">
+ <h1>
+  Ellipses?
+ </h1>
+ <h2>
+  Vincenty's Formula (wikipedia)
+ </h2>
+ <p>
+  Part one...
+ </p>
+ <div class="vbox">
+ </div>
+ <div class="hbox">
+  <img class="screeny" src="graphics/geopython/vincenty1.png"/>
+ </div>
+</div>
+<div class="slide">
+ <h1>
+  External Libraries
+ </h1>
+ <h2>
+  Geopy
+ </h2>
+ <pre><code class="language-python" id="elldist">&gt;&gt;&gt;  import geopy
+&gt;&gt;&gt;  from geopy.distance import great_circle
+&gt;&gt;&gt;  
+&gt;&gt;&gt;  great_circle(points[0].coord(), points[1].coord()).m
+83.255573810242
+&gt;&gt;&gt;  
+&gt;&gt;&gt;  geopy.distance.EARTH_RADIUS = EARTH_RADIUS/1000
+&gt;&gt;&gt;  great_circle(points[0].coord(), points[1].coord()).m
+83.32357305730429</code>
+</pre>
+</div>
+<div class="slide">
+ <h1>
+  geopy again
+ </h1>
+ <h2>
+  Vincenty distance
+ </h2>
+ <pre>
+<code class="language-python" id="vincenty">&gt;&gt;&gt;  from geopy.distance import vincenty
+&gt;&gt;&gt;  great_circle(points[0].coord(), points[1].coord()).m
+83.32357305730429
+&gt;&gt;&gt;  vincenty(points[0].coord(), points[1].coord()).m
+83.19003856394464</code>
+</pre>
+</div>
+<div class="slide">
+ <h1>
+  More geopy magic
+ </h1>
+ <h2>
+  geocoding
+ </h2>
+ <pre>
+<code class="language-python" id="geocode">&gt;&gt;&gt;  from geopy.geocoders import osm
+&gt;&gt;&gt;  g = osm.Nominatim(timeout=10)
+&gt;&gt;&gt;  home = g.geocode("Lancaster, UK")
+&gt;&gt;&gt;  away = g.geocode("Bergen")
+&gt;&gt;&gt;  vincenty(home.point, away.point).miles
+532.7862059372253</code>
+</pre>
+</div>
+<div class="slide">
+ <h1>
+  fiona
+ </h1>
+ <h2>
+  Read data with fiona
+ </h2>
+ <pre>
+<code class="language-python" id="fiona">&gt;&gt;&gt;  import fiona
+&gt;&gt;&gt;  england = fiona.open("./data/England/engos.shp","r")
+&gt;&gt;&gt;  england.meta
+{'crs': {u'lon_0': -2, u'k': 0.9996012717, u'datum': u'OSGB36', u'y_0': -100000, u'no_defs': True, u'proj': u'tmerc', u'x_0': 400000, u'units': u'm', u'lat_0': 49}, 'driver': u'ESRI Shapefile', 'schema': {'geometry': 'Polygon', 'properties': OrderedDict([(u'ADMIN_NAME', 'str:16'), (u'AREA', 'float:12.3'), (u'PERIMETER', 'float:12.3'), (u'ADMIN2_', 'float:11'), (u'ADMIN2_ID', 'float:11'), (u'GMI_ADMIN2', 'str:16'), (u'COUNTRY', 'str:16')])}}
+&gt;&gt;&gt;  england.meta['crs']
+{u'lon_0': -2, u'k': 0.9996012717, u'datum': u'OSGB36', u'y_0': -100000, u'no_defs': True, u'proj': u'tmerc', u'x_0': 400000, u'units': u'm', u'lat_0': 49}
+&gt;&gt;&gt;  england.meta['schema']['properties']
+OrderedDict([(u'ADMIN_NAME', 'str:16'), (u'AREA', 'float:12.3'), (u'PERIMETER', 'float:12.3'), (u'ADMIN2_', 'float:11'), (u'ADMIN2_ID', 'float:11'), (u'GMI_ADMIN2', 'str:16'), (u'COUNTRY', 'str:16')])</code>
+</pre>
+</div>
+<div class="slide">
+ <h1>
+  features
+ </h1>
+ <h2>
+  get the features
+ </h2>
+ <pre>
+<code class="language-python" id="features">&gt;&gt;&gt;  features = list(england)
+&gt;&gt;&gt;  features[31]['properties']
+OrderedDict([(u'ADMIN_NAME', u'Greater London'), (u'AREA', 0.208), (u'PERIMETER', 2.344), (u'ADMIN2_', 68.0), (u'ADMIN2_ID', 68.0), (u'GMI_ADMIN2', u'GBR-ENG-GLN'), (u'COUNTRY', u'England')])
+&gt;&gt;&gt;  features[32]['geometry'].keys()
+['type', 'coordinates']
+&gt;&gt;&gt;  features[32]['geometry']['type']
+'Polygon'
+&gt;&gt;&gt;  features[32]['geometry']['coordinates'][0][:10]
+[(331218.2373748748, 158030.96091701294), (331552.45641719806, 159850.56801485896), (331184.5610176229, 161275.67909807622), (332744.8749578969, 162213.8018719227), (333147.93532494607, 163443.23593871036), (333276.9293876288, 164430.18301096238), (332605.5811962088, 164841.68800689976), (332557.7609554768, 165614.56502538442), (333861.26445889025, 166247.08819716435), (335210.2781934715, 165920.42688398046)]</code>
+</pre>
+</div>
+<div class="slide">
+ <h1>
+  processing with shapely
+ </h1>
+ <h2>
+  example
+ </h2>
+ <pre>
+<code class="language-python" id="shapely1">&gt;&gt;&gt;  from shapely.geometry import mapping, shape
+&gt;&gt;&gt;  
+&gt;&gt;&gt;  import fiona
+&gt;&gt;&gt;  
+&gt;&gt;&gt;  input_shp = "./data/England/engos.shp"
+&gt;&gt;&gt;  output_shp = "./data/England/buffered.shp"
+&gt;&gt;&gt;  width = 10000
+&gt;&gt;&gt;  
+&gt;&gt;&gt;  def bufferinout(input_shp, output_shp, width):
+...      with fiona.open(input_shp, "r") as input:
+...          schema = { 'geometry': 'Polygon', 'properties': { 'name': 'str' } }
+...          with fiona.open(output_shp, "w", "ESRI Shapefile", schema, crs = input.crs) as output:
+...              for feature in input:
+...                  output.write({
+...                  'properties': {
+...                      'name': feature['properties']['ADMIN_NAME']
+...                  },
+...                  'geometry': mapping(shape(feature['geometry']).buffer(width))
+...                  })
+...  
+&gt;&gt;&gt;  bufferinout(input_shp, output_shp, width)</code>
+</pre>
+</div>
+<div class="slide">
+ <h1>
+  Scripting
+ </h1>
+ <h2>
+  Command-line scripts
+ </h2>
+ <p>
+  With this in
+  <code>
+   buffering.py
+  </code>
+  for example:
+  <pre>
+<code class="language-python asis" id="scripty">
+import sys
+
+import fiona
+
+def bufferinout(input, output, width):
+  " compute the buffer... "
+  ....
+
+if __name__=="__main__":
+  input = sys.argv[1]
+  output = sys.argv[2]
+  width = float(sys.argv[3])
+  bufferinout(input, output, width)
+</code>
+</pre>
+  <p>
+   Can then:
+   <ul>
+    <li>
+     <code>
+      python buffering.py england.shp buffer10k.shp 10000
+     </code>
+     on the command line
+    </li>
+    <li>
+     <code>
+      from buffering import bufferinout
+     </code>
+     in python and use that function.
+    </li>
+   </ul>
+  </p>
+ </p>
+</div>
+<div class="slide">
+ <h1>
+  Shell power
+ </h1>
+ <h2>
+  back to bash...
+ </h2>
+ <pre>
+<code class="language-bash">
+for width in 10000 20000 30000 40000 ; do
+ python buffering.py england.shp buffer${width}.shp $width
+done
+</code>
+</pre>
+ <p>
+  Or in Python:
+ </p>
+ <pre>
+<code class="language-python asis" id="shellpower">
+from buffering import bufferinout
+for width in [10000, 20000, 30000, 40000]:
+     bufferinout("england.shp","buffer%s.shp" % width, width)
+</code>
+</pre>
+</div>
+<div class="slide">
+ <h1>
+  Geopandas
+ </h1>
+ <h2>
+  The future
+ </h2>
+ <div class="vbox">
+ </div>
+ <div class="hbox">
+  <img class="screeny" src="graphics/geopython/geopandas.jpg"/>
+ </div>
+</div>
+<div class="slide">
+ <h1>
+  Geopandas
+ </h1>
+ <h2>
+  Like Spatial Data Frames
+ </h2>
+ <pre>
+<code class="language-python" id="panda">&gt;&gt;&gt;  import geopandas as gpd
+&gt;&gt;&gt;  africa = gpd.read_file("./data/Africa/africa.shp")
+&gt;&gt;&gt;  africa[:5]
+     CNTRY_NAME  COUNT FIRST_CONT FIRST_FIPS       FIRST_REGI  SUM_POP_AD  \
+0       Algeria     48     Africa         AG  Northern Africa    34222570   
+1        Angola     18     Africa         AO    Middle Africa    11527258   
+2         Benin      6     Africa         BN   Western Africa     5175394   
+3      Botswana     10     Africa         BC  Southern Africa     1185250   
+4  Burkina Faso     30     Africa         UV   Western Africa    10817069   
+
+    SUM_SQKM_A  SUM_SQMI_A                                           geometry  
+0  2320972.339  896127.445  POLYGON ((2.963609933853149 36.80221557617188,...  
+1  1252420.770  483559.643  (POLYGON ((11.77499961853027 -16.8047256469726...  
+2   116514.769   44986.354  POLYGON ((2.484417915344238 6.340485572814941,...  
+3   580011.123  223942.302  POLYGON ((26.16782760620117 -24.66396713256836...  
+4   273719.207  105682.987  POLYGON ((-1.003023386001587 14.8400993347168,...  
+
+[5 rows x 9 columns]</code>
+</pre>
+</div>
+<div class="slide">
+ <h1>
+  plotting
+ </h1>
+ <h2>
+  plot method
+ </h2>
+ <pre>
+<code class="language-python" data-dpi="50" data-size="8,8" id="pandaplots">&gt;&gt;&gt;  import matplotlib.pyplot as plt
+&gt;&gt;&gt;  fig = africa.plot(column="SUM_POP_AD")
+&gt;&gt;&gt;  plt.show()
+&gt;&gt;&gt;  plt.cla()
+&gt;&gt;&gt;  fig = africa.plot(column="FIRST_REGI",legend=True)
+&gt;&gt;&gt;  plt.show()</code>
+</pre>
+ <img src="pandaplots-0.png"/>
+ <img src="pandaplots-1.png"/>
+</div>
+<div class="slide">
+ <h1>
+  Buffering Geopandas
+ </h1>
+ <h2>
+  GeoPandas methods for geometry
+ </h2>
+ <pre>
+<code class="language-python" id="buffering">&gt;&gt;&gt;  from geopandas import GeoSeries
+&gt;&gt;&gt;  england = gpd.read_file("./data/England/engos.shp")
+&gt;&gt;&gt;  fig = england.plot()
+&gt;&gt;&gt;  plt.show()
+&gt;&gt;&gt;  plt.cla()
+&gt;&gt;&gt;  coast = GeoSeries(england.geometry.unary_union)
+&gt;&gt;&gt;  coastal_buffer = GeoSeries(coast.buffer(20000))
+&gt;&gt;&gt;  fig = coastal_buffer.plot()
+&gt;&gt;&gt;  fig = coast.plot()
+&gt;&gt;&gt;  plt.show()</code>
+</pre>
+ <img src="buffering-0.png"/>
+ <img src="buffering-1.png"/>
+</div>
+<div class="slide">
+ <h1>
+  JS Mapping
+ </h1>
+ <h2>
+  Packages
+ </h2>
+ <ul>
+  <li>
+   <a href="https://github.com/jwass/mplleaflet">
+    mplleaflet
+   </a>
+   <pre>
+<code class="language-python asis" id="usemplleaflet">
+import mplleaflet
+niger.plot()
+mplleaflet.show()
+</code>
+</pre>
+  </li>
+  <li>
+   <a href="https://github.com/wrobstory/folium/">
+    folium
+   </a>
+   <pre>
+<code class="language-python asis" id="folium">
+open("niger.json","w").write(niger.to_json())
+
+map_osm = folium.Map(location=[17,10])
+
+map_osm.geo_json("./niger.json", data=niger,
+         columns=['ADM2','POP'], key_on='feature.properties.ADM2',
+         fill_color='YlGn', fill_opacity=0.7, line_opacity=0.2,
+         legend_name="Fake Population")
+
+map_osm.create_map("niger.html")
+</code>
+</pre>
+  </li>
+ </ul>
+</div>
+<div class="slide">
+ <h1>
+  Leaflet map
+ </h1>
+ <h2>
+  From folium
+ </h2>
+ <img src="graphics/geopython/leafletniger.png"/>
+</div>
+<div class="slide">
+ <h1>
+  ipython
+ </h1>
+ <h2>
+  notebooks
+ </h2>
+ <img src="graphics/geopython/ipymap.png"/>
+</div>
+<div class="slide">
+ <h1>
+  pysal
+ </h1>
+ <h2>
+  Local Moran calculation
+ </h2>
+ <pre>
+<code class="language-python" id="moran">&gt;&gt;&gt;  import geopandas as gpd
+&gt;&gt;&gt;  import numpy as np
+&gt;&gt;&gt;  import pysal
+&gt;&gt;&gt;  shapefile = "data/NewYork/NY8_utm18.shp"
+&gt;&gt;&gt;  galfile = "data/NewYork/NY_nb.gal"
+&gt;&gt;&gt;  spdf = gpd.read_file(shapefile)
+&gt;&gt;&gt;  
+&gt;&gt;&gt;  y = np.array(spdf['Cases'])
+&gt;&gt;&gt;  w = pysal.open(galfile).read()
+&gt;&gt;&gt;  lm = pysal.Moran_Local(y,w,transformation="V")
+&gt;&gt;&gt;  lm.Is[:5]
+array([ 0.56778845,  0.70374966, -0.51771761, -0.19487455, -0.17114584])</code>
+</pre>
+</div>
+<div class="slide">
+ <h1>
+  Map
+ </h1>
+ <h2>
+  Plot the I values
+ </h2>
+ <pre>
+<code class="language-python" id="imap">&gt;&gt;&gt;  spdf['I']=lm.Is
+&gt;&gt;&gt;  spdf.plot(column="I")
+&lt;matplotlib.axes.AxesSubplot object at 0x4fad890&gt;
+&gt;&gt;&gt;  plt.show()</code>
+</pre>
+ <img src="imap-0.png"/>
+</div>
+<div class="slide">
+ <h1>
+  pysal
+ </h1>
+ <h2>
+  Features
+ </h2>
+ <ul>
+  <li>
+   esda (moran, geary...)
+  </li>
+  <li>
+   smoothing (empirical bayes...)
+  </li>
+  <li>
+   regression with spatial weights (ols, probit...)
+  </li>
+ </ul>
+ <h2>
+  Unfeatures
+ </h2>
+ <ul>
+  <li>
+   graphics
+  </li>
+  <li>
+   summaries
+  </li>
+  <li>
+   documentation?
+  </li>
+ </ul>
+</div>
+<div class="slide">
+ <h1>
+  Rpy2
+ </h1>
+ <h2>
+  Fill in the gaps
+ </h2>
+ <pre>
+<code class="language-python" id="rpy2">&gt;&gt;&gt;  import rpy2.robjects as robjects
+&gt;&gt;&gt;  from rpy2.robjects.packages import importr
+&gt;&gt;&gt;  spdep = importr("spdep")
+&gt;&gt;&gt;  NY_nb = spdep.read_gal(galfile, region=range(281))
+&gt;&gt;&gt;  lmR = spdep.localmoran(robjects.FloatVector(spdf['Cases']), listw = spdep.nb2listw(NY_nb, style="S"))
+&gt;&gt;&gt;  fig = plt.hist(lmR.rx(True,"Z.Ii"))
+&gt;&gt;&gt;  plt.show()</code>
+</pre>
+ <img src="rpy2-0.png"/>
+</div>
+<div class="slide">
+ <h1>
+  Summary
+ </h1>
+ <h2>
+  Stuff you might want to look into...
+ </h2>
+ <p>
+  <ul>
+   <li>
+    Python
+   </li>
+   <li>
+    ipython notebooks are cool!
+   </li>
+   <li>
+    Numpy for numeric matrix/raster ops
+   </li>
+   <li>
+    Scipy - scientific python
+   </li>
+   <li>
+    shapely, fiona, rasterio for data and geometry
+   </li>
+   <li>
+    Geopandas for spatial data
+   </li>
+   <li>
+    Pysal for spatial statistics
+   </li>
+   <li>
+    pymc for MCMC calculations (like BUGS)
+   </li>
+   <li>
+    <em>
+     LOTS
+    </em>
+    of machine learning stuff
+   </li>
+   <li>
+    Rpy2 when all else fails
+   </li>
+  </ul>
+ </p>
+</div>
+
+<script src="scripts/prism.js"></script>
+
+</body>
+</html>

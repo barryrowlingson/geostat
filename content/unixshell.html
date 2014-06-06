@@ -1,0 +1,703 @@
+---
+extends: presentation.j2
+---
+{% block timer %}
+{% endblock timer %}
+{% block slides %}
+<div class="slide cover title">
+
+  <img src="graphics/lulogo.png" alt="Lancaster University"  class="cover" /><br clear="all" />
+  <h1>Unix Shell Programming</h1>
+  <h2>Your toolkit to an easier life...</h2>
+</div>
+
+<div class="slide">
+  <h1>A little story...</h1>
+<div class="vbox"></div>
+<div class="hbox">
+  <img class="screeny" src="graphics/unixdata/email1.png" />
+</div>
+</div>
+
+<div class="slide">
+  <h1>A little story...</h1>
+<div class="vbox"></div>
+<div class="hbox">
+  <img class="screeny" src="graphics/unixdata/email2.png" />
+</div>
+</div>
+
+<div class="slide">
+  <h1>A little story...</h1>
+<div class="vbox"></div>
+<div class="hbox">
+  <img class="screeny" src="graphics/unixdata/email3.png" />
+</div>
+</div>
+
+<div class="slide">
+  <h1>What To Do</h1>
+  <p class="bigtext">Now what?</p>
+  <p>What's the first thing you do when you get an unknown file?</p>
+  <ul>
+    <li>Double-click it and hope?</li>
+    <li>Load it into Excel?</li>
+    <li>Load it into Word?</li>
+    <li>Search for the extension on the internet?</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h1>basic file ops</h1>
+  <ul>
+    <li>
+    <p>Run <code>file</code> on it</p>
+  <pre>
+$ <span class="input">file otter.gen</span>
+otter.gen: ASCII text
+</pre>
+    </li>
+    <li>
+<p>Check its size</p>
+    <pre>
+$ <span class="input">ls -l otter.gen</span>
+-rw-r--r-- 1 rowlings rowlings <span class="highlight">2341</span> Apr 24 17:24 otter.gen
+</pre>
+    </li>
+    <li>
+    <p>Human-readable size...</p>
+<pre>
+$ <span class="input">ls -l<span class="highlight">h</span> otter.gen</span>
+-rw-r--r-- 1 rowlings rowlings <span class="highlight">2.3K</span> Apr 24 17:24 otter.gen
+</pre>
+    </li>
+    <li>
+    <p>Word, line, character count</p>
+<pre>
+$ <span class="input">wc otter.gen</span>
+ 130  251 2341 otter.gen
+</pre>
+    </li>
+    
+  </ul>
+</div>
+
+<div class="slide">
+  <h1>See the contents...</h1>
+  <ul>
+    
+    <li>
+    <p>Run <code>head</code> on it</p>
+    <pre>
+$ <span class="input">head otter.gen</span>
+1
+-145.8953 60.63951
+-145.8936 60.63902
+-145.8931 60.63774
+-145.8941 60.63768
+-145.8922 60.63676
+-145.8941 60.63651
+-145.8976 60.63645
+-145.8972 60.63480
+-145.8955 60.63450
+</pre>
+    </li>
+    <li>
+    <p>Run <code>tail</code> on it</p>
+    <pre>
+$ <span class="input">tail -5 otter.gen</span>
+-145.8901 60.62465
+-145.8901 60.62465
+END
+END
+
+</pre>
+    </li>
+  </ul>
+
+  <p>What are those <code>END</code> lines doing there?</p>
+  
+</div>
+
+<div class="slide">
+  <h1>Paging Mr File</h1>
+  <h2><code>more (or less)</code></h2>
+  <pre>
+$ <span class="input">more otter.gen</span>
+1
+-145.8953 60.63951
+-145.8936 60.63902
+-145.8931 60.63774
+...
+-145.8962 60.63878
+-145.8965 60.64031
+-145.8926 60.64104
+END
+2
+-145.9652 60.61914
+-145.9634 60.61841
+-145.9599 60.61731
+-145.9587 60.61780
+-145.9587 60.61878
+-145.9599 60.61902
+-145.9587 60.61988
+-145.9565 60.61939
+-145.9577 60.61865
+-145.9560 60.61792
+-145.9595 60.61731
+<span class="invert">--More--(34%)</span>
+</pre>
+  <p>Then hit <code>space</code> for next page, <code>q</code> to quit, <code>/</code> to find, <code>h</code> for help.</p>
+<p><code>less</code> is an alternative pager to <code>more</code> with more features.</p>
+</div>
+
+<div class="slide">
+  <h1>Search</h2>
+  <h2>The oddly-named <code>grep</code> command</h2>
+  <pre>
+$ <span class="input">grep END otter.gen</span>
+END
+END
+END
+END
+</pre>
+
+  <h2>With matching line numbers</h2>
+  <pre>
+$ <span class="input">grep <span class="highlight">-n</span> END otter.gen</span>
+33:END
+89:END
+128:END
+129:END
+</pre>
+
+  <h2>Filter output to input</h2>
+<pre>
+$ <span class="input">grep END otter.gen <span class="highlight">|</span> wc -l</span>
+4
+</pre>
+</div>
+
+<div class="slide">
+  <h1>Stream Filtering</h1>
+  <p>
+  <code>grep</code> is great for filtering HUGE files
+  <ul>
+    <li>Match a pattern:
+  <pre>
+$ <span class="input">grep <span class="highlight">^LA1</span> postcodes.txt > LA1-codes.txt</span>
+</pre>
+    </li>
+<li>Chain filters in a pipe:
+  <pre>
+$ <span class="input">grep ^LA1 cases.txt | tr '[a-z]' '[A-Z]'  | sed 's/FEMAIL/FEMALE/' | grep FEMALE > clean-uc-f.txt</span>
+</pre>
+    </li>
+    <li>
+ Sort and count unique lines:
+  <pre>
+$ <span class="input">sort cases.txt | uniq -c</span>
+      1 LA1 Femail
+      2 LA1 Female
+      1 LA1 Male
+      1 LA2 Femail
+      1 LA2 Female
+      1 LA2 Maile
+</pre>
+</li>
+</ul>
+    </div>
+
+    <div class="slides">
+      <h1>Database joins</h1>
+      <h2>Add postcode data to individual data</h2>
+<ul>
+  <li>Postcode data file:
+      <pre>
+LA1 34243,22310
+LA2 77394,12848
+LA3 66100,26230
+</pre>
+</li>
+<li>Sorted individual data file:
+<pre>
+LA1 Femail
+LA1 Female
+LA1 Female
+LA1 Male
+LA2 Femail
+LA2 Female
+LA2 Maile
+</pre>
+</li>
+<li>Use <code>join</code>:
+<pre>
+$ <span class="input">join sort-cases.txt LA1-codes.txt</span>
+LA1 Femail 34243,22310
+LA1 Female 34243,22310
+LA1 Female 34243,22310
+LA1 Male 34243,22310
+LA2 Femail 77394,12848
+LA2 Female 77394,12848
+LA2 Maile 77394,12848
+</pre>
+</li>
+</ul>
+</div>
+
+
+<div class="slide">
+  <h1>Format hypothesis</h1>
+
+  <p>For each otter track:</p>
+  <ul>
+    <li>ID number</li>
+    <li>lat-long pair</li>
+    <li>END mark</li>
+  </ul>
+  <p>Then an END mark
+  </p>
+  
+  </div>
+
+<div class="slide">
+<h1>awk</h1>
+  <ul>
+    <li><code>awk</code> is a very useful text-file stream processing language</li>
+    <li>read a line at a time, split line into fields</li>
+    <li>each line of the language is <code>pattern {action}</code></li>
+    <li>if the pattern expression is true, the action is run</li>
+    <li>the default pattern is always true, the default action is print this line</li>
+  </ul>
+  <p>
+  Print all lines that don't have two fields:
+  </p>
+  <pre>
+$ <span class="input"><span class="highlight">awk 'NF!=2' otter.gen</span></span>
+1
+END
+2
+END
+3
+END
+END
+</pre>
+
+<p>Print message where second field is greater than some value:</p>
+  <pre>
+$ <span class="input">awk '$2 > 60.64 {print NR," large Y ",$0}' otter.gen</span>
+31  large Y  -145.8965 60.64031
+32  large Y  -145.8926 60.64104
+98  large Y  -145.9250 60.64104
+99  large Y  -145.9233 60.64153
+</pre>
+</div>
+
+<div class="slide">
+  <h1>More awk</h1>
+  <h2>How many points in each line?</h2>
+  <p>Use the result of <code>grep -n END otter.gen</code> to get the line numbers:</p>
+  <pre>
+$ <span class="input">grep <span class="highlight">-n</span> END otter.gen</span>
+33:END
+89:END
+128:END
+129:END
+</pre>
+
+  <p>Use two awk rules:</p>
+  <ul>
+    <li><code>BEGIN {n=0}</code> runs before the first line, and sets <code>n</code> to 0.</li>
+    <li><code>{print $1 - n; n=$1 }</code> runs on every line and prints the difference between <code>n</code> and the first field.
+    It then updates <code>n</code> to that value:</li>
+    </ul>
+  <pre>
+$ <span class="input">grep -n END otter.gen | awk -F: 'BEGIN {n=0} ; {print $1 - n; n=$1 } '</span>
+33
+56
+39
+1
+</pre>
+</div>
+
+
+<div class="slide">
+<h1>Path Length</h1>
+  <h2>Compute the path length for each otter track...</h2>
+  <pre>
+$0=="END" && id != "END" {print id,dist}
+NF==1 {dist=0; first=1; id=$1}
+NF==2 && first==1 {
+  x1=$1
+  y1=$2
+  first = 0
+}
+NF==2 {x2=$1
+ y2=$2
+ dist = dist + sqrt((x2-x1)^2 + (y2-y1)^2)
+ y1 = y2
+ x1 = x2
+}
+</pre>
+
+<p>Then run:</p>
+
+  <pre>
+$ <span class="input">awk <span class="highlight">-f pathlength.awk</span> otter.gen</span>
+1 0.070923
+2 0.102671
+3 0.110943
+</pre>
+</div>
+
+
+<div class="slide">
+  <h1>You've got mail!</h1>
+<div class="mail">
+ <div class="from">From: rebecca davis</div>
+ <div class="subject">Subject: otter data</div>
+ <div class="contents">
+ Just checking email before getting on plane to South Pole. Data is in Arc/Info Ungenerate format.
+   Here's the full set of 38 track files.
+ </div>
+</div>
+<div class="cimage">
+<img src="graphics/unixdata/ziplist.png" />
+</div>
+</div>
+
+<div class="slide">
+  <h1>GDAL/OGR</h1>
+  <h2>Load straight into QGIS...</h2>
+<div class="cimage">
+  <img src="graphics/unixdata/tracks1.png" />
+  </div>
+</div>
+
+
+<div class="slide">
+  <h1>Ungenerate Format</h1>
+  <h2>Arc/Info Ungenerate Format</h2>
+  <ul>
+    <li>Can be read by OGR/GDAL utilities</li>
+    <li>Basic info:
+  <pre>
+$ <span class="input"><span class="highlight">ogrinfo otter.gen</span></span>
+Had to open data source read-only.
+INFO: Open of `otter.gen'
+      using driver `ARCGEN' successful.
+1: otter (Line String)
+</pre>
+</li>
+<li>Summary info, all layers:
+<pre>
+$ <span class="input">ogrinfo <span class="highlight">-so -al</span> otter.gen</span>
+Had to open data source read-only.
+INFO: Open of `otter.gen'
+      using driver `ARCGEN' successful.
+
+Layer name: otter
+Geometry: Line String
+Feature Count: 3
+Extent: (-145.965700, 60.615840) - (-145.890100, 60.641530)
+Layer SRS WKT:
+(unknown)
+ID: Integer (0.0)
+</pre>
+</li>
+</ul>
+</div>
+
+<div class="slide">
+<h1>ogrinfo</h1>
+  <h2>ogrinfo</h2>
+  <pre>
+$ <span class="input">ogrinfo <span class="highlight">-al</span> otter.gen </span>
+Had to open data source read-only.
+INFO: Open of `otter.gen'
+      using driver `ARCGEN' successful.
+
+Layer name: otter
+Geometry: Line String
+Feature Count: 3
+Extent: (-145.965700, 60.615840) - (-145.890100, 60.641530)
+Layer SRS WKT:
+(unknown)
+ID: Integer (0.0)
+OGRFeature(otter):0
+  ID (Integer) = 1
+  LINESTRING (-145.8953 60.63951,-145.8936 60.63902,...1,-145.8926 60.64104)
+OGRFeature(otter):1
+  ID (Integer) = 2
+  LINESTRING (-145.9652 60.61914,-145.9634 60.61841,....
+...
+</pre>
+</div>
+
+
+<div class="slide">
+  <h1>ogr2ogr conversion</h1>
+<h2>Command-line geodata conversion</h2>
+<pre>
+$ <span class="input"><span class="highlight">ogr2ogr</span> -s_srs "+init=epsg:4326" -t_srs "+init=epsg:4326" otter.shp otter.gen</span>
+
+$ <span class="input">ogrinfo -so -al otter.shp</span>
+
+INFO: Open of `otter.shp'
+      using driver `ESRI Shapefile' successful.
+
+Layer name: otter
+Geometry: Line String
+Feature Count: 3
+Extent: (-145.965700, 60.615840) - (-145.890100, 60.641530)
+Layer SRS WKT:
+GEOGCS["GCS_WGS_1984",
+    DATUM["WGS_1984",
+        SPHEROID["WGS_84",6378137,298.257223563]],
+    PRIMEM["Greenwich",0],
+    UNIT["Degree",0.017453292519943295]]
+ID: Integer (10.0)
+</pre>
+
+  <ul><li>Want to do:
+  <pre>
+$ <span class="input"><span class="highlight">ogr2ogr</span> -s_srs "+init=epsg:4326" -t_srs "+init=epsg:4326" otter.shp otter.gen</span>
+</pre>
+  for each "generate" file...</li></ul>
+
+  
+
+</div>
+
+<div class="slide">
+<h1>Loops and variables</h1>
+  <h2>Command-line loops</h2>
+<p>Use <code>echo</code> to print things:
+  <pre>
+$ <span class="input"><span class="highlight">echo</span> "Hello World"</span>
+Hello World
+
+$ <span class="input">echo <psan class="highlight">$HOME</span></span>
+/home/rowlings
+</pre>
+  </p>
+
+  <p>Loop over files and print name:
+
+  <pre>
+$ <span class="input"><span class="highlight">for f in *.gen ; do</span> echo $f ; <span class="highlight">done</span></span>
+otter-2002-06-01.gen
+otter-2002-06-02.gen
+otter-2002-06-03.gen
+otter-2002-06-04.gen
+otter-2002-06-05.gen
+...
+</pre>
+</p>
+  <p>
+  How do we create the output shapefile name?
+  </p>
+</div>
+
+<div class="slide">
+  <h1>Variables and substitutions</h1>
+  <h2>Substitutions</h2>
+<pre>
+$ <span class="input">for f in *.gen ; do echo <span class="highlight" title="strip .gen, add .shp">${f%.gen}.shp</span> <span class="highlight" title="substring - 10 characters starting at 6">${f:6:10}</span> ; done</span>
+otter-2002-06-01.shp 2002-06-01
+otter-2002-06-02.shp 2002-06-02
+otter-2002-06-03.shp 2002-06-03
+otter-2002-06-04.shp 2002-06-04
+otter-2002-06-05.shp 2002-06-05
+otter-2002-06-06.shp 2002-06-06
+otter-2002-06-07.shp 2002-06-07
+...
+</pre>
+</div>
+
+<div class="slide">
+  <h1>Batch Converting</h1>
+  <h2>Batch Conversion</h2>
+
+  <ul><li>Want to do:
+
+  <pre>
+$ <span class="input"><span class="highlight">ogr2ogr</span> -s_srs "+init=epsg:4326" -t_srs "+init=epsg:4326" otter.shp otter.gen</span>
+</pre>
+  for each "generate" file...</li>
+<li>So the loop is:
+  <pre>
+$ <span class="input">for f in *.gen ; do</span>
+>   <span class="input">ogr2ogr -s_srs "+init=epsg:4326" -t_srs "+init=epsg:4326" <span class="highlight">${f%.gen}.shp $f</span></span>
+>   <span class="input">done</span>
+</pre>
+  </li>
+
+  <li>Now we have a shapefile for each input file.</li></ul>
+  
+</div>
+
+<div class="slide">
+  <h1>Adding Attributes</h1>
+  <p>We want to:
+  <ul>
+    <li>Merge all the data into one shapefile</li>
+    <li>Add the date to each feature</li>
+  </ul>
+  </p>
+  <div class="cimage"><img src="graphics/unixdata/labeltracks.png" />
+  </div>
+</div>
+
+<div class="slide">
+<h1>ogrinfo tricks</h1>
+  <ul><li>Add a new field:
+  <pre>
+$ <span class="input">ogrinfo otter-2002-06-01.shp -sql "ALTER TABLE  otter-2002-06-01  ADD COLUMN day character(15)"</span>
+</pre>
+
+</li>
+<li>Add date to field:
+<pre>
+$ <span class="input">ogrinfo otter-2002-06-01.shp -dialect SQLite -sql "UPDATE 'otter-2002-06-01' SET day='2002-06-01'"</span>
+</pre>
+</li>
+<li>We now have:
+<pre>
+$ <span class="input">ogrinfo <span class="highlight">-geom=NO</span>  -al otter-2002-06-01.shp </span>
+INFO: Open of `otter-2002-06-01.shp'
+      using driver `ESRI Shapefile' successful.
+
+Layer name: otter-2002-06-01
+Geometry: Line String
+Feature Count: 3
+[etc]
+ID: Integer (10.0)
+day: String (15.0)
+OGRFeature(otter-2002-06-01):0
+  ID (Integer) = 34
+  day (String) = 2002-06-01
+
+OGRFeature(otter-2002-06-01):1
+  ID (Integer) = 143
+  day (String) = 2002-06-01
+
+OGRFeature(otter-2002-06-01):2
+  ID (Integer) = 145
+  day (String) = 2002-06-01
+</pre>
+</ul>
+</div>
+
+<div class="slide">
+  <h1>All Together Now</h1>
+  <h2>Scripted</h2>
+  <pre><code class="language-bash">
+for genfile in *.gen ; do
+
+  echo "Processing " $genfile
+
+  layer="${genfile%.gen}"
+  shapefile="${layer}.shp"
+  day="${genfile:6:10}"
+
+  ogr2ogr -s_srs "+init=epsg:4326" -t_srs "+init=epsg:4326" $shapefile $genfile
+ 
+  ogrinfo $shapefile -sql "ALTER TABLE $layer ADD COLUMN day character(15)"
+  ogrinfo $shapefile -dialect SQLite -sql "UPDATE '$layer' SET day='$day'"
+
+done
+</code></pre>
+  <ul><li>Now we have all the shapefiles, with the date as a field in each</li>
+  <li>Next step: merge all the shapefiles</li>
+  </ul>
+</div>
+
+<div class="slide">
+<h1>Merge</h1>
+<ul><li>Start with a first shapefile, update and append:
+  <pre>
+ogr2ogr alltracks.shp part-1.shp
+ogr2ogr -update -append alltracks.shp part-2.shp -nln alltracks
+ogr2ogr -update -append alltracks.shp part-3.shp -nln alltracks
+ogr2ogr -update -append alltracks.shp part-4.shp -nln alltracks
+...
+</pre>
+</li>
+<li>Automate this...</li>
+  </div>
+
+<div class="slide">
+  <h1>Merge</h1>
+  <h2>Use append and update</h2>
+  <pre><code class="language-bash">
+for f in *.shp ; do
+    <span class="highlight">if [ -f alltracks.shp ] ; then</span>
+	echo merging $f    
+	ogr2ogr -update -append alltracks.shp $f -nln alltracks 
+    <span class="highlight">else</span>
+	echo starting with $f
+	ogr2ogr  alltracks.shp $f
+    <span class="highlight">fi</span>
+done
+</code>
+</pre>
+</div>
+
+<div class="slide">
+    <h1>Final output</h1>
+  <h2>So we get...</h2>
+  <pre><code class="language-none">
+$ <span class="input">ogrinfo -geom=NO -al alltracks.shp | more</span>
+INFO: Open of `alltracks.shp'
+      using driver `ESRI Shapefile' successful.
+
+Layer name: alltracks
+Geometry: Line String
+Feature Count: 214
+Extent: (-145.981367, 60.586132) - (-145.817827, 60.649236)
+Layer SRS WKT:
+GEOGCS["GCS_WGS_1984",
+    DATUM["WGS_1984",
+        SPHEROID["WGS_84",6378137,298.257223563]],
+    PRIMEM["Greenwich",0],
+    UNIT["Degree",0.017453292519943295]]
+ID: Integer (10.0)
+day: String (15.0)
+OGRFeature(alltracks):0
+  ID (Integer) = 34
+  day (String) = 2002-06-01
+
+OGRFeature(alltracks):1
+  ID (Integer) = 143
+  day (String) = 2002-06-01
+
+OGRFeature(alltracks):2
+  ID (Integer) = 145
+  day (String) = 2002-06-01
+...
+</code>
+</pre>
+</div>
+
+<div class="slide">
+  <h1>Mapped</h1>
+  <h2>Tracks and table</h2>
+<div class="cimage">
+<img src="graphics/unixdata/tracktable.png" />
+</div>
+</div>
+
+<div class="slide">
+<h1>Summary</h1>
+  <h2>Summary</h2>
+  <ul>
+    <li>Use the shell</li>
+    <li>Get file info</li>
+    <li>Summarise file properties</li>
+    <li>Extract/Transform</li>
+    <li>Command-Line Geospatial Tools</li>
+  </ul>
+</div>
+
+{% endblock slides %}

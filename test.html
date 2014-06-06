@@ -1,0 +1,120 @@
+<!DOCTYPE html >
+<html>
+<head>
+<title>Geostat Summer School</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="copyright" content="Copyright &#169; 2014 Barry Rowlingson, Lancaster University" />
+<meta name="font-size-adjustment" content="-2" />
+<link rel="stylesheet" href="styles/slidy.css" type="text/css" />
+<link rel="stylesheet" href="styles/w3c-blue.css" type="text/css" />
+<link rel="stylesheet" href="styles/prism.css" type="text/css" />
+<script src="scripts/slidy.js" charset="utf-8" type="text/javascript">
+</script>
+</head>
+<body>
+<div class="background">
+  <img alt="" id="head-icon" src="graphics/clogo.png" />
+  <img alt="W3C logo" id="head-logo" src="graphics/lulogo.png" />
+</div>
+
+<div class="background slanty">
+<img src="graphics/w3c-logo-slanted.jpg" alt="slanted W3C logo" />
+</div>
+
+<div class="slide cover title">
+ <img alt="Lancaster University" class="cover" src="graphics/lulogo.png"/>
+ <br clear="all"/>
+ <h1>
+  GeoPython
+ </h1>
+ <h2>
+  Your Python Starter...
+ </h2>
+</div>
+<div class="slide">
+ <h1>
+  Python?
+ </h1>
+ <h2>
+  Its easy!
+ </h2>
+ <div class="vbox">
+ </div>
+ <div class="hbox">
+  <img class="screeny" src="graphics/geopython/python.png"/>
+ </div>
+</div>
+<div class="slide">
+ <h1>
+  Distance
+ </h1>
+ <h2>
+  Pythagoras
+ </h2>
+ <pre>
+<code class="language-python">
+&gt;&gt;&gt;  
+&gt;&gt;&gt;  import math
+&gt;&gt;&gt;  def pythagoras(x0, y0, x1, y1):
+...     return math.sqrt((x1-x0)**2 + (y1-y0)**2)
+...  
+&gt;&gt;&gt;  print pythagoras(0,0,3,4)
+5.0</code>
+</pre>
+</div>
+<div class="slide">
+ <h1>
+  Sphere Distance
+ </h1>
+ <h2>
+  Spherical Distance
+ </h2>
+ <pre>
+<code class="language-python">
+&gt;&gt;&gt;  
+&gt;&gt;&gt;  EARTH_RADIUS = 6378137 # radius in metres
+&gt;&gt;&gt;  
+&gt;&gt;&gt;  def great_circle_distance(latlong_a, latlong_b):
+...      lat1, lon1 = latlong_a
+...      lat2, lon2 = latlong_b
+...   
+...      dLat = math.radians(lat2 - lat1)
+...      dLon = math.radians(lon2 - lon1)
+...      a = (math.sin(dLat / 2) * math.sin(dLat / 2) +
+...              math.cos(math.radians(lat1)) * math.cos(math.radians(lat2)) * 
+...              math.sin(dLon / 2) * math.sin(dLon / 2))
+...      c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+...      d = EARTH_RADIUS * c
+...      
+...      return d
+...  
+&gt;&gt;&gt;  points = [ (40.750307,-73.994819), (40.749641,-73.99527) ]
+&gt;&gt;&gt;  print great_circle_distance(points[0], points[1])
+83.3253628551</code>
+</pre>
+</div>
+<div class="slide">
+ <h1>
+  External Libraries
+ </h1>
+ <h2>
+  Geopy
+ </h2>
+ <pre><code class="language-python">
+&gt;&gt;&gt;  
+&gt;&gt;&gt;  import geopy
+&gt;&gt;&gt;  from geopy.distance import great_circle
+&gt;&gt;&gt;  
+&gt;&gt;&gt;  print great_circle(points[0], points[1]).m
+83.2555738102
+&gt;&gt;&gt;  
+&gt;&gt;&gt;  geopy.distance.EARTH_RADIUS = EARTH_RADIUS/1000
+&gt;&gt;&gt;  print great_circle(points[0], points[1]).m
+83.3235730573</code>
+</pre>
+</div>
+
+<script src="scripts/prism.js"></script>
+
+</body>
+</html>

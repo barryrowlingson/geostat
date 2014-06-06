@@ -1,0 +1,15 @@
+hello
+for genfile in *.gen ; do
+
+  echo "Processing " $genfile
+
+  layer="${genfile%.gen}"
+  shapefile="${layer}.shp"
+  day="${genfile:6:10}"
+
+  ogr2ogr -s_srs "+init=epsg:4326" -t_srs "+init=epsg:4326" $shapefile $genfile
+ 
+  ogrinfo $shapefile -sql "ALTER TABLE $layer ADD COLUMN day character(15)"
+  ogrinfo $shapefile -dialect SQLite -sql "UPDATE '$layer' SET day='$day'"
+
+done
