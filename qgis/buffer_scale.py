@@ -13,7 +13,7 @@ from processing.core.VectorWriter import VectorWriter
 import rootfind
 reload(rootfind)
 
-## 2.0 version. 2.2 has .getObject(...) and .features(...)
+# 2.0 version. 2.2 has .getObject(...) and .features(...)
 areas_layer = processing.getobject(areas)
 areas_features = processing.getfeatures(areas_layer)
 
@@ -43,8 +43,9 @@ for inFeat in areas_features:
     result = rootfind.bisect(f, 0.0, float(d), target_area/100.0, 100)
     outGeom = inGeom.buffer(result['x'], segments)
     outFeat.setGeometry(outGeom)
+
+    outFeat.setAttributes(inFeat.attributes())
+    
     writer.addFeature(outFeat)
     
 del writer
-
-
