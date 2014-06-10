@@ -10,8 +10,8 @@ from processing.tools import vector
 import processing
 from processing.core.VectorWriter import VectorWriter
 
-areas_layer = processing.getObject(areas)
-areas_features = processing.features(areas_layer)
+areas_layer = processing.getobject(areas)
+areas_features = processing.getfeatures(areas_layer)
 attrid = areas_layer.fieldNameIndex(owner)
 
 fields={}

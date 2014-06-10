@@ -42,6 +42,248 @@
   </p>
 </div>
 
+<div class="slide">
+  <h1>Screenshot</h1>
+  <h2>Typical screen</h2>
+  <img class="screen" src="graphics/qgis/qgisscreen.png" />
+</div>
+
+<div class="slide">
+  <h1>Composer</h1>
+  <h2>Map Composer</h2>
+  <img class="screen" src="graphics/qgis/composer.png" />
+</div>
+
+<div class="slide">
+  <h1>C++</h1>
+  <h2>C++</h2>
+  <img class="screen" src="graphics/qgis/cpp.png" />
+</div>
+
+<div class="slide">
+  <h1>Development</h1>
+  <h2>Visualisation</h2>
+  <img class="screen" src="graphics/qgis/fancyvis.png" />
+</div>
+
+<div class="slide">
+  <h1>Feature</h1>
+  <h2>Structure</h2>
+  <img class="screen withBorder" src="graphics/qgis/feature.png" />
+</div>
+
+<div class="slide">
+  <h1>Vector Layer</h1>
+  <h2>Structure</h2>
+  <img class="screen withBorder" src="graphics/qgis/vectorlayer.png" />
+</div>
+
+<div class="slide">
+  <h1>Methods</h1>
+  <h2>Listed</h2>
+  <img class="screen withBorder" src="graphics/qgis/geometry.png" />
+</div>
+
+<div class="slide">
+  <h1>Python Console</h1>
+  <h2>Console</h2>
+  <img class="screen withBorder" src="graphics/qgis/pythonconsole.png" />
+</div>
+
+<div class="slide">
+  <h1>Python Editor</h1>
+  <h2>Console with Editor</h2>
+  <img class="screen withBorder" src="graphics/qgis/consoleedit.png" />
+</div>
+
+<div class="slide">
+  <h1>Squirrels</h1>
+  <h2>Red and Grey</h2>
+  <img src="graphics/qgis/red-flickr-imh.png"/>
+  <img src="graphics/qgis/grey-flickr-hisgett.png"/>
+  <p>CC-licensed from flickr users imh and hisgett</p>
+</div>
+
+<div class="slide">
+  <h1>Squirrels</h1>
+  <h2>Red and Grey</h2>
+  <img src="graphics/qgis/sign-flickr-kingedward.png"/>
+  <img src="graphics/qgis/redsign-flickr-bods.png"/>
+  <p>CC-licensed from flickr users king-edward and hisgett</p>
+</div>
+
+<div class="slide">
+<h1>Status</h1>
+  <h2>Distribution</h2>
+  <img src="graphics/qgis/sqstatus.png" />
+  <ul>
+  <li>What if populations triple and areas triple?</li>
+  <li>Can we buffer the regions and check for overlap?</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h1>Buffering</h1>
+  <h2>Options</h2>
+<img src="graphics/qgis/processingtoolboxbuffer.png" />
+</div>
+  <div class="slide">
+    <h1>Fixed Buffer</h1>
+    <h2>Styled...</h1>
+    <img src="graphics/qgis/fixedbuffer.png" />
+  <ul>
+    <li>How do we find a buffer width that scales an area?</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h1>Strategy</h1>
+  <h2>Binary Search</h2>
+  <p>
+  <ul>
+    <li>Area of buffer increases as width increases</li>
+    <li>Use a binary search algorithm to find w such that area of buffered region = S * area of region</li>
+  </ul>
+  </p>
+</div>
+
+<div class="slide">
+  <h1>QGIS Processing Scripts</h1>
+  <h2>Easy</h2>
+  <pre>
+<code class="language-python asis">
+##[BSR scripts]=group
+##areas=vector
+##scale_factor=number 2
+##buffered=output vector
+
+from PyQt4.QtCore import *
+from qgis.core import *
+
+import processing
+from processing.core.VectorWriter import VectorWriter
+from bsrutils import rescaleBuffer
+
+areas_layer = processing.getobject(areas)
+areas_features = processing.getfeatures(areas_layer)
+fields = areas_layer.pendingFields().toList()
+writer = VectorWriter(buffered, None, fields, POLYGON, areas_layer.crs() )
+
+for feature in areas_features:
+  outFeat = rescaleBuffer(feature, scale_factor)
+  writer.addFeature(outFeat)
+</code>
+</pre>
+</div>
+
+<div class="slide">
+  <h1>ui</h1>
+  <h2>Gets this</h2>
+  <img class="withBorder" src="graphics/qgis/scalebufferui.png" />
+</div>
+
+<div class="slide">
+  <h1>Run</h1>
+  <h2>and get</h2>
+ <img class="withBorder" style="width: 50%" src="graphics/qgis/triplearea.png" />
+</div>
+
+<div class="slide">
+  <h1>Conflict Area</h1>
+  <h2>Getting the conflict area</h2>
+  <p>
+  <ul>
+    <li>Split layer on attribute value</li>
+    <li>Intersection of those layers</li>
+    <li><img src="graphics/qgis/conflict.png" style="width:50%" /> </li>
+    <li>Can we automate this?</li>
+  </ul>
+  </p>
+</div>
+
+<div class="slide">
+  <h1>Conflict processing script</h1>
+  <h2>outline</h2>
+  <pre>
+<code class="language-python asis">
+##[BSR scripts]=group
+##areas=vector
+##owner=field areas
+##conflicts=output vector
+...
+for aFeature in features:
+  for bFeature in features:
+     if ownerValue(aFeature) != ownerValue(bFeature):
+        if aFeature.geometry().intersects(bFeature.geometry()):
+            outFeature.setGeometry(aFeature.geometry().intersection(bFeature.geometry()))
+            writer.addFeature(outFeature)
+</code>
+</pre>
+</div>
+
+<div class="slide">
+<h1>Conflict UI</h1>
+  <h2>Dialog</h2>
+  <img src="graphics/qgis/conflictui.png" />
+</div>
+
+<div class="slide">
+  <h1>Two steps</h1>
+  <h2>Can we do better?</h2>
+  <ul>
+    <li>Buffer areas by scale factor</li>
+    <li>Compute conflict areas</li>
+  </ul>
+  <h2>Models</h2>
+  <ul>
+    <li>Allows connected algorithms</li>
+    <li>Can use any algorithms in the processing toolbox</li>
+    <li>Graphical tool connecting inputs, algorithms, outputs</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h1>Model builder</h1>
+  <h2>Expansion Model</h2>
+  <img class="withBorder" src="graphics/qgis/modelconflict.png" />
+</div>
+
+<div class="slide">
+  <h1>Model builder</h1>
+  <h2>Expansion UI</h2>
+  <img class="withBorder" src="graphics/qgis/expansiondialog.png" />
+</div>
+
+<div class="slide">
+  <h1>Conflict Output</h1>
+  <h2>One step, one extra layer</h2>
+  <img class="withBorder" src="graphics/qgis/conflictarea.png" />
+</div>
+
+<div class="slide">
+  <h1>Other advanced QGIS features</h1>
+  <h2>Good stuff</h2>
+  <ul>
+    <li>Python Plugins</li>
+    <ul>
+      <li>Build Custom GUIs</li>
+      <li>Create Menus</li>
+      <li>Define New Layer Types</li>
+      <li>Define New Renderers</li>
+    </ul>
+    <li>R Processing Scripts</li>
+    <ul>
+      <li>Leverage R-spatial</li>
+      <li>Examples Included</li>
+    </ul>
+    <li>Feature Editing/Cleanup</li>
+    <li>Spatial Database Integration</li>
+    <li>OGC Services</li>
+  </ul>
+</div>
+
+
+
 
 <script src="scripts/prism.js"></script>
 

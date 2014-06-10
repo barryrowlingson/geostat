@@ -489,6 +489,8 @@ div.slide.cover a:hover, div.slide.cover a:active {
 
 div.comment { display: none; visibility: hidden }
 
+img.screen { width: 50%  }
+
 @media print {
  div.slide h1 { background: transparent; color: black }
  div.slide.cover { background: transparent; color: black }
