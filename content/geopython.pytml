@@ -14,8 +14,7 @@ extends: presentation.j2
 <div class="slide">
   <h1>Python?</h1>
   <h2>Its easy!</h2>
-<div class="vbox"></div>
-<div class="hbox">
+<div class="cimage">
   <img class="screeny" src="graphics/geopython/python.png" />
 </div>
 </div>
@@ -94,6 +93,27 @@ foo(100)
 foo(myp=100)
 foo(myparameter=100)
 foo(myparameterandabit=100)
+</code>
+</pre>
+</div>
+
+<div class="slide">
+<h1>Generators</h1>
+<h2>Advanced stuff made easy</h2>
+<pre>
+<code class="language-python" id="gener">
+def pairs(v):
+    n = len(v)
+    for i in range(0,n):
+        a = v[i]
+        for j in range(i+1, n):
+            b=v[j]
+            yield ((i,j),(a,b))
+
+values = ["A","B","C","D","E"]
+for ((x,y),(vx,vy)) in pairs(values):
+    print "%s %s : %s %s " % (x,y,vx,vy)
+
 </code>
 </pre>
 </div>
@@ -267,8 +287,7 @@ great_circle_distance(points[0], points[1])
   <h1>Ellipses?</h1>
   <h2>Vincenty's Formula (wikipedia)</h2>
 <p>Part one...</p>
-<div class="vbox"></div>
-<div class="hbox">
+<div class="cimage">
   <img class="screeny" src="graphics/geopython/vincenty1.png" />
 </div>
 
@@ -281,6 +300,8 @@ great_circle_distance(points[0], points[1])
   <pre><code class="language-python" id="elldist">
 import geopy
 from geopy.distance import great_circle
+
+great_circle(points[0].coord(), points[1].coord())
 
 great_circle(points[0].coord(), points[1].coord()).m
 
@@ -313,6 +334,7 @@ g = osm.Nominatim(timeout=10)
 home = g.geocode("Lancaster, UK")
 away = g.geocode("Bergen")
 vincenty(home.point, away.point).miles
+vincenty(home.point, away.point).km
 </code>
 </pre>
 </div>
@@ -428,10 +450,8 @@ for width in [10000, 20000, 30000, 40000]:
 <div class="slide">
   <h1>Geopandas</h1>
   <h2>The future</h2>
-<div class="vbox"></div>
-<div class="hbox">
-  <img class="screeny" src="graphics/geopython/geopandas.jpg" />
-</div>
+<div class="cimage">  <img class="screeny" src="graphics/geopython/geopandas.jpg" /></div>
+
 </div>
   
 <div class="slide">
@@ -459,8 +479,10 @@ fig = africa.plot(column="FIRST_REGI",legend=True)
 plt.show()
 </code>
 </pre>
+<div class="cimage">
   <img src="pandaplots-0.png" />
     <img src="pandaplots-1.png"/>
+</div>
 </div>
 
 <div class="slide">
@@ -480,8 +502,10 @@ fig = coast.plot()
 plt.show()
 </code>
 </pre>
+<div class="cimage">
   <img src="buffering-0.png" />
   <img src="buffering-1.png" />
+</div>
 </div>
 
 <div class="slide">
@@ -520,14 +544,14 @@ map_osm.create_map("niger.html")
 <div class="slide"> 
 <h1>Leaflet map</h1>
   <h2>From folium</h2>
-  <img src="graphics/geopython/leafletniger.png" />
+<div class="cimage">  <img src="graphics/geopython/leafletniger.png" /></div>
 
 </div>
 
 <div class="slide">
   <h1>ipython</h1>
   <h2>notebooks</h2>
-  <img src="graphics/geopython/ipymap.png" />
+<div class="cimage">  <img src="graphics/geopython/ipymap.png" /></div>
 </div>
 
 <div class="slide">
@@ -560,7 +584,7 @@ spdf.plot(column="I")
 plt.show()
 </code>
 </pre>
-<img src="imap-0.png" />
+<div class="cimage"><img src="imap-0.png" /></div>
 </div>
 
 <div class="slide">
@@ -593,7 +617,9 @@ fig = plt.hist(lmR.rx(True,"Z.Ii"))
 plt.show()
 </code>
 </pre>
+<div class="cimage">
   <img src="rpy2-0.png" />
+</div>
 </div>
 
 <div class="slide">

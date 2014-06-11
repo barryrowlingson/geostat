@@ -38,9 +38,7 @@
  <h2>
   Its easy!
  </h2>
- <div class="vbox">
- </div>
- <div class="hbox">
+ <div class="cimage">
   <img class="screeny" src="graphics/geopython/python.png"/>
  </div>
 </div>
@@ -139,6 +137,38 @@ TypeError: foo() got an unexpected keyword argument 'myparameterandabit'</code>
 </div>
 <div class="slide">
  <h1>
+  Generators
+ </h1>
+ <h2>
+  Advanced stuff made easy
+ </h2>
+ <pre>
+<code class="language-python" id="gener">&gt;&gt;&gt;  def pairs(v):
+...      n = len(v)
+...      for i in range(0,n):
+...          a = v[i]
+...          for j in range(i+1, n):
+...              b=v[j]
+...              yield ((i,j),(a,b))
+...  
+&gt;&gt;&gt;  values = ["A","B","C","D","E"]
+&gt;&gt;&gt;  for ((x,y),(vx,vy)) in pairs(values):
+...      print "%s %s : %s %s " % (x,y,vx,vy)
+...  
+0 1 : A B 
+0 2 : A C 
+0 3 : A D 
+0 4 : A E 
+1 2 : B C 
+1 3 : B D 
+1 4 : B E 
+2 3 : C D 
+2 4 : C E 
+3 4 : D E</code>
+</pre>
+</div>
+<div class="slide">
+ <h1>
   imports
  </h1>
  <h2>
@@ -173,7 +203,7 @@ def baz(x):
  </h2>
  <pre><code class="language-python" id="libmods">&gt;&gt;&gt;  import os
 &gt;&gt;&gt;  os.path.realpath(".")
-'/home/rowlings/Work/Teaching/GeostatSummerSchool/2014/Site/testing'
+'/home/rowlings/Work/Teaching/GeostatSummerSchool/2014/Site/geostat'
 &gt;&gt;&gt;  os.path.join("foo","bar","baz")
 'foo/bar/baz'
 &gt;&gt;&gt;  os.uname()
@@ -374,9 +404,7 @@ uname(...)
  <p>
   Part one...
  </p>
- <div class="vbox">
- </div>
- <div class="hbox">
+ <div class="cimage">
   <img class="screeny" src="graphics/geopython/vincenty1.png"/>
  </div>
 </div>
@@ -389,6 +417,9 @@ uname(...)
  </h2>
  <pre><code class="language-python" id="elldist">&gt;&gt;&gt;  import geopy
 &gt;&gt;&gt;  from geopy.distance import great_circle
+&gt;&gt;&gt;  
+&gt;&gt;&gt;  great_circle(points[0].coord(), points[1].coord())
+Distance(0.0832555738102)
 &gt;&gt;&gt;  
 &gt;&gt;&gt;  great_circle(points[0].coord(), points[1].coord()).m
 83.255573810242
@@ -426,7 +457,9 @@ uname(...)
 &gt;&gt;&gt;  home = g.geocode("Lancaster, UK")
 &gt;&gt;&gt;  away = g.geocode("Bergen")
 &gt;&gt;&gt;  vincenty(home.point, away.point).miles
-532.7862059372253</code>
+532.7862059372253
+&gt;&gt;&gt;  vincenty(home.point, away.point).km
+857.4362841353374</code>
 </pre>
 </div>
 <div class="slide">
@@ -578,9 +611,7 @@ for width in [10000, 20000, 30000, 40000]:
  <h2>
   The future
  </h2>
- <div class="vbox">
- </div>
- <div class="hbox">
+ <div class="cimage">
   <img class="screeny" src="graphics/geopython/geopandas.jpg"/>
  </div>
 </div>
@@ -627,8 +658,10 @@ for width in [10000, 20000, 30000, 40000]:
 &gt;&gt;&gt;  fig = africa.plot(column="FIRST_REGI",legend=True)
 &gt;&gt;&gt;  plt.show()</code>
 </pre>
- <img src="pandaplots-0.png"/>
- <img src="pandaplots-1.png"/>
+ <div class="cimage">
+  <img src="pandaplots-0.png"/>
+  <img src="pandaplots-1.png"/>
+ </div>
 </div>
 <div class="slide">
  <h1>
@@ -649,8 +682,10 @@ for width in [10000, 20000, 30000, 40000]:
 &gt;&gt;&gt;  fig = coast.plot()
 &gt;&gt;&gt;  plt.show()</code>
 </pre>
- <img src="buffering-0.png"/>
- <img src="buffering-1.png"/>
+ <div class="cimage">
+  <img src="buffering-0.png"/>
+  <img src="buffering-1.png"/>
+ </div>
 </div>
 <div class="slide">
  <h1>
@@ -700,7 +735,9 @@ map_osm.create_map("niger.html")
  <h2>
   From folium
  </h2>
- <img src="graphics/geopython/leafletniger.png"/>
+ <div class="cimage">
+  <img src="graphics/geopython/leafletniger.png"/>
+ </div>
 </div>
 <div class="slide">
  <h1>
@@ -709,7 +746,9 @@ map_osm.create_map("niger.html")
  <h2>
   notebooks
  </h2>
- <img src="graphics/geopython/ipymap.png"/>
+ <div class="cimage">
+  <img src="graphics/geopython/ipymap.png"/>
+ </div>
 </div>
 <div class="slide">
  <h1>
@@ -743,10 +782,12 @@ array([ 0.56778845,  0.70374966, -0.51771761, -0.19487455, -0.17114584])</code>
  <pre>
 <code class="language-python" id="imap">&gt;&gt;&gt;  spdf['I']=lm.Is
 &gt;&gt;&gt;  spdf.plot(column="I")
-&lt;matplotlib.axes.AxesSubplot object at 0x4fad890&gt;
+&lt;matplotlib.axes.AxesSubplot object at 0x6906110&gt;
 &gt;&gt;&gt;  plt.show()</code>
 </pre>
- <img src="imap-0.png"/>
+ <div class="cimage">
+  <img src="imap-0.png"/>
+ </div>
 </div>
 <div class="slide">
  <h1>
@@ -797,7 +838,9 @@ array([ 0.56778845,  0.70374966, -0.51771761, -0.19487455, -0.17114584])</code>
 &gt;&gt;&gt;  fig = plt.hist(lmR.rx(True,"Z.Ii"))
 &gt;&gt;&gt;  plt.show()</code>
 </pre>
- <img src="rpy2-0.png"/>
+ <div class="cimage">
+  <img src="rpy2-0.png"/>
+ </div>
 </div>
 <div class="slide">
  <h1>
