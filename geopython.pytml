@@ -115,6 +115,41 @@ foo(myparameterandabit=100)
 </div>
 
 <div class="slide">
+<h1>Loops</h1>
+<h2><code>for</code> loops</h2>
+<pre>
+<code class="language-python" id="forloop">
+word = ["B", "A", "R", "R", "Y"]
+for letter in word:
+ print letter
+
+</code>
+</pre>
+</div>
+
+<div class="slide">
+<h1>Nested</h1>
+<h2>Loops in loops</h2>
+<pre>
+<code class="language-python" id="nestedloops">
+n = len(word)
+for ia in range(0,n):
+  a = word[ia]
+  for ib in range(ia+1, n):
+    b = word[ib]
+    print a,b
+
+</code>
+</pre>
+<p>That's a fairly common pattern, we've cluttered it up. All we really want to do is:</p>
+<pre><code class="language-python asis" id="canwe">
+for (a,b) in pairs(word):
+  print a,b
+</code>
+</pre>
+</div>
+
+<div class="slide">
 <h1>Generators</h1>
 <h2>Advanced stuff made easy</h2>
 <pre>
@@ -125,11 +160,10 @@ def pairs(v):
         a = v[i]
         for j in range(i+1, n):
             b=v[j]
-            yield ((i,j),(a,b))
+            yield (a,b)
 
-values = ["A","B","C","D","E"]
-for ((x,y),(vx,vy)) in pairs(values):
-    print "%s %s : %s %s " % (x,y,vx,vy)
+for (a,b) in pairs(word):
+  print a,b
 
 </code>
 </pre>
@@ -171,6 +205,8 @@ os.path.join("foo","bar","baz")
 os.uname()
 </code>
 </pre>
+<p>Python comes with a complete standard library. R didn't have a full file name 
+handling package until 2014 (the <code>pathological</code> package on github).</p>
 </div>
 
 <div class="slide">
@@ -193,6 +229,7 @@ dir(x)
 x.title()
 x.upper()
 x.split()
+help(x.split)
 </code>
 </pre>
 </div>
