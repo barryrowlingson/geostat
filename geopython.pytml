@@ -121,7 +121,7 @@ foo(myparameterandabit=100)
 <code class="language-python" id="forloop">
 word = ["B", "A", "R", "R", "Y"]
 for letter in word:
- print letter
+   print letter
 
 </code>
 </pre>
@@ -216,7 +216,7 @@ handling package until 2014 (the <code>pathological</code> package on github).</
 help(os.uname)
 </code>
 </pre>
-<p>Unlike R, most objects supply help!</p>
+<p>Unlike R, you can get help from objects!</p>
 
 </div>
 <div class="slide">
@@ -347,6 +347,30 @@ great_circle_distance(points[0], points[1])
 
 </div>
 
+<div class="slide">
+<h1>Serious numbers</h1>
+<h2>Use numpy for maths</h2>
+<pre>
+<code class="language-python" id="numpy1">
+import numpy as np
+[math.sin(x) for x in [1,2,3]]
+np.sin([1,2,3])
+np.random.poisson(10,20)
+</code>
+</pre>
+
+<pre>
+<code class="language-python" id="numpy2">
+m = np.matrix([[1,2], [3,4]])
+m
+m * m
+m * m.transpose()
+m * m.I
+</code>
+</pre>
+
+</div>
+
 
 <div class="slide">
 <h1>External Libraries</h1>
@@ -355,12 +379,15 @@ great_circle_distance(points[0], points[1])
 import geopy
 from geopy.distance import great_circle
 
-great_circle(points[0].coord(), points[1].coord())
+d = great_circle(points[0].coord(), points[1].coord())
+d
 
-great_circle(points[0].coord(), points[1].coord()).m
+d.meters
+
+d.feet
 
 geopy.distance.EARTH_RADIUS = EARTH_RADIUS/1000
-great_circle(points[0].coord(), points[1].coord()).m
+great_circle(points[0].coord(), points[1].coord()).meters
 </code>
 </pre>
 </div>
@@ -570,7 +597,9 @@ plt.show()
 <pre>
 <code class="language-python asis" id="usemplleaflet">
 import mplleaflet
+niger = gpd.read_file("./data/Africa/niger.shp")
 niger.plot()
+# write an HTML file and show in browser
 mplleaflet.show()
 </code>
 </pre>
@@ -578,15 +607,18 @@ mplleaflet.show()
   <li><a href="https://github.com/wrobstory/folium/">folium</a>
 <pre>
 <code class="language-python asis" id="folium">
+# convert to geoJSON file
 open("niger.json","w").write(niger.to_json())
 
 map_osm = folium.Map(location=[17,10])
 
+# add map to output
 map_osm.geo_json("./niger.json", data=niger,
          columns=['ADM2','POP'], key_on='feature.properties.ADM2',
          fill_color='YlGn', fill_opacity=0.7, line_opacity=0.2,
          legend_name="Fake Population")
 
+# create and view in browser
 map_osm.create_map("niger.html")
 </code>
 </pre>

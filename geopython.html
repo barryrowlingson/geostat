@@ -148,7 +148,7 @@ TypeError: foo() got an unexpected keyword argument 'myparameterandabit'</code>
  <pre>
 <code class="language-python" id="forloop">&gt;&gt;&gt;  word = ["B", "A", "R", "R", "Y"]
 &gt;&gt;&gt;  for letter in word:
-...   print letter
+...     print letter
 ...  
 B
 A
@@ -290,7 +290,7 @@ uname(...)
     Return a tuple identifying the current operating system.</code>
 </pre>
  <p>
-  Unlike R, most objects supply help!
+  Unlike R, you can get help from objects!
  </p>
 </div>
 <div class="slide">
@@ -485,6 +485,39 @@ split(...)
 </div>
 <div class="slide">
  <h1>
+  Serious numbers
+ </h1>
+ <h2>
+  Use numpy for maths
+ </h2>
+ <pre>
+<code class="language-python" id="numpy1">&gt;&gt;&gt;  import numpy as np
+&gt;&gt;&gt;  [math.sin(x) for x in [1,2,3]]
+[0.8414709848078965, 0.9092974268256817, 0.1411200080598672]
+&gt;&gt;&gt;  np.sin([1,2,3])
+array([ 0.84147098,  0.90929743,  0.14112001])
+&gt;&gt;&gt;  np.random.poisson(10,20)
+array([14,  9,  5, 10, 10, 12, 10, 12,  5, 14, 12,  7,  9,  7,  7,  8, 11,
+        8, 11, 11])</code>
+</pre>
+ <pre>
+<code class="language-python" id="numpy2">&gt;&gt;&gt;  m = np.matrix([[1,2], [3,4]])
+&gt;&gt;&gt;  m
+matrix([[1, 2],
+        [3, 4]])
+&gt;&gt;&gt;  m * m
+matrix([[ 7, 10],
+        [15, 22]])
+&gt;&gt;&gt;  m * m.transpose()
+matrix([[ 5, 11],
+        [11, 25]])
+&gt;&gt;&gt;  m * m.I
+matrix([[  1.00000000e+00,   0.00000000e+00],
+        [  8.88178420e-16,   1.00000000e+00]])</code>
+</pre>
+</div>
+<div class="slide">
+ <h1>
   External Libraries
  </h1>
  <h2>
@@ -493,14 +526,18 @@ split(...)
  <pre><code class="language-python" id="elldist">&gt;&gt;&gt;  import geopy
 &gt;&gt;&gt;  from geopy.distance import great_circle
 &gt;&gt;&gt;  
-&gt;&gt;&gt;  great_circle(points[0].coord(), points[1].coord())
+&gt;&gt;&gt;  d = great_circle(points[0].coord(), points[1].coord())
+&gt;&gt;&gt;  d
 Distance(0.0832555738102)
 &gt;&gt;&gt;  
-&gt;&gt;&gt;  great_circle(points[0].coord(), points[1].coord()).m
+&gt;&gt;&gt;  d.meters
 83.255573810242
 &gt;&gt;&gt;  
+&gt;&gt;&gt;  d.feet
+273.1482079345222
+&gt;&gt;&gt;  
 &gt;&gt;&gt;  geopy.distance.EARTH_RADIUS = EARTH_RADIUS/1000
-&gt;&gt;&gt;  great_circle(points[0].coord(), points[1].coord()).m
+&gt;&gt;&gt;  great_circle(points[0].coord(), points[1].coord()).meters
 83.32357305730429</code>
 </pre>
 </div>
@@ -777,7 +814,9 @@ for width in [10000, 20000, 30000, 40000]:
    <pre>
 <code class="language-python asis" id="usemplleaflet">
 import mplleaflet
+niger = gpd.read_file("./data/Africa/niger.shp")
 niger.plot()
+# write an HTML file and show in browser
 mplleaflet.show()
 </code>
 </pre>
@@ -788,15 +827,18 @@ mplleaflet.show()
    </a>
    <pre>
 <code class="language-python asis" id="folium">
+# convert to geoJSON file
 open("niger.json","w").write(niger.to_json())
 
 map_osm = folium.Map(location=[17,10])
 
+# add map to output
 map_osm.geo_json("./niger.json", data=niger,
          columns=['ADM2','POP'], key_on='feature.properties.ADM2',
          fill_color='YlGn', fill_opacity=0.7, line_opacity=0.2,
          legend_name="Fake Population")
 
+# create and view in browser
 map_osm.create_map("niger.html")
 </code>
 </pre>
@@ -857,7 +899,7 @@ array([ 0.56778845,  0.70374966, -0.51771761, -0.19487455, -0.17114584])</code>
  <pre>
 <code class="language-python" id="imap">&gt;&gt;&gt;  spdf['I']=lm.Is
 &gt;&gt;&gt;  spdf.plot(column="I")
-&lt;matplotlib.axes.AxesSubplot object at 0x5d06250&gt;
+&lt;matplotlib.axes.AxesSubplot object at 0x6155090&gt;
 &gt;&gt;&gt;  plt.show()</code>
 </pre>
  <div class="cimage">
