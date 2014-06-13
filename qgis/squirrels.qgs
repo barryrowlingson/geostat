@@ -4,10 +4,10 @@
     <mapcanvas>
         <units>meters</units>
         <extent>
-            <xmin>-378534.34728622215334326</xmin>
-            <ymin>7238636.62934806570410728</ymin>
-            <xmax>-365486.04546168795786798</xmax>
-            <ymax>7255684.3250537496060133</ymax>
+            <xmin>-374909.93786056555109099</xmin>
+            <ymin>7243457.48083502613008022</ymin>
+            <xmax>-369978.81157085456652567</xmax>
+            <ymax>7249867.10495606437325478</ymax>
         </extent>
         <projections>1</projections>
         <destinationsrs>
@@ -23,10 +23,10 @@
             </spatialrefsys>
         </destinationsrs>
     </mapcanvas>
-    <legend updateDrawingOrder="true">
-        <legendlayer drawingOrder="-1" open="true" checked="Qt::Unchecked" name="conflicts" showFeatureCount="0">
+    <legend updateDrawingOrder="true" activeLayer="squirrels20140609104011858">
+        <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="conflicts" showFeatureCount="0">
             <filegroup open="true" hidden="false">
-                <legendlayerfile isInOverview="0" layerid="conflicts20140610115717068" visible="0"/>
+                <legendlayerfile isInOverview="0" layerid="conflicts20140610115717068" visible="1"/>
             </filegroup>
         </legendlayer>
         <legendgroup open="false" checked="Qt::Unchecked" name="Buffers">
@@ -66,10 +66,47 @@
     </legend>
     <Composer title="Squirrels" visible="0">
         <Composition printResolution="300" paperWidth="297" snapGridOffsetX="0" snapGridResolution="10" snapGridOffsetY="0" alignmentSnap="1" snapping="0" numPages="1" paperHeight="210" alignmentSnapTolerance="2" printAsRaster="0">
-            <ComposerLabel valign="32" labelText="&lt;div style=&quot;font-family:sans-serif&quot;>&#xa;&lt;p>&#xa;This is the map of squirrel habitat &#xa;areas in the study area.&#xa;&lt;/p>&#xa;&lt;p>&#xa;We wish to:&#xa;&lt;ul>&#xa;&lt;li>Double the size of each habitat area&lt;/li>&#xa;&lt;li>Tell if the new red and gray habitats overlap&lt;/li>&#xa;&lt;/ul>&#xa;&lt;/p>&#xa;&lt;/div>&#xa;" htmlState="2" halign="1" margin="1">
+            <ComposerPicture pictureWidth="30" file="../graphics/qgis/grey-flickr-hisgett.png" pictureHeight="30" mapId="-1">
+                <ComposerItem width="30" x="240.677" transparency="0" y="100.935" rotation="0" height="30" positionMode="0" frame="false" outlineWidth="0.3" zValue="9" lastValidViewScaleFactor="2.45973" uuid="{37b265b6-fc9f-4a74-9164-151340a817fe}" id="" background="true" blendMode="0" positionLock="false">
+                    <FrameColor alpha="255" red="0" blue="0" green="0"/>
+                    <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
+                </ComposerItem>
+            </ComposerPicture>
+            <ComposerPicture pictureWidth="30" file="../graphics/qgis/red-flickr-imh.png" pictureHeight="30" mapId="-1">
+                <ComposerItem width="30" x="240.677" transparency="0" y="130.935" rotation="0" height="30" positionMode="0" frame="false" outlineWidth="0.3" zValue="8" lastValidViewScaleFactor="2.45973" uuid="{3070ca1c-97a7-4461-ae4f-54e4211a764f}" id="" background="false" blendMode="0" positionLock="false">
+                    <FrameColor alpha="255" red="0" blue="0" green="0"/>
+                    <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
+                </ComposerItem>
+            </ComposerPicture>
+            <ComposerLabel valign="32" labelText="Smallest gap between species" htmlState="0" halign="1" margin="1">
                 <LabelFont description="Sans,10,-1,5,50,0,0,0,0,0"/>
                 <FontColor red="0" blue="0" green="0"/>
-                <ComposerItem width="71.9266" x="213.157" transparency="0" y="90.3643" rotation="0" height="55.1801" positionMode="0" frame="false" outlineWidth="0.3" zValue="6" lastValidViewScaleFactor="2.45973" uuid="{417be6b6-5aaa-46c1-abdb-1fe2390fdba6}" id="" background="true" blendMode="0" positionLock="false">
+                <ComposerItem width="33.337" x="122.778" transparency="0" y="175.629" rotation="0" height="13.0095" positionMode="0" frame="false" outlineWidth="0.3" zValue="7" lastValidViewScaleFactor="2.45973" uuid="{976ddb04-494b-45b1-a4ad-02046c5d9878}" id="" background="true" blendMode="0" positionLock="false">
+                    <FrameColor alpha="255" red="0" blue="0" green="0"/>
+                    <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
+                </ComposerItem>
+            </ComposerLabel>
+            <ComposerArrow startMarkerFile="" arrowHeadWidth="4" endMarkerFile="" outlineWidth="1" markerMode="0">
+                <ArrowColor alpha="255" red="0" blue="0" green="0"/>
+                <StartPoint x="123.518" y="176.938"/>
+                <StopPoint x="98.5575" y="130.758"/>
+                <ComposerItem width="29.9605" x="96.0575" transparency="0" y="128.258" rotation="0" height="51.1805" positionMode="0" frame="false" outlineWidth="0" zValue="6" lastValidViewScaleFactor="2.45973" uuid="{b36fbe1c-a5e9-4a8b-a1f0-5ebf7289566e}" id="" background="true" blendMode="0" positionLock="false">
+                    <FrameColor alpha="0" red="255" blue="255" green="255"/>
+                    <BackgroundColor alpha="0" red="255" blue="255" green="255"/>
+                </ComposerItem>
+            </ComposerArrow>
+            <ComposerLabel valign="32" labelText="&lt;div style=&quot;font-family:sans-serif&quot;>&#xa;&lt;h2>[% format_date( $now, 'dd MMM yyyy')%]&lt;/h2>&#xa;&lt;p>&#xa;This is the map of squirrel habitat &#xa;areas in the study area.&#xa;&lt;/p>&#xa;&lt;p>&#xa;We wish to:&#xa;&lt;ul>&#xa;&lt;li>Triple the size of each habitat area&lt;/li>&#xa;&lt;li>Tell if the new red and gray habitats overlap&lt;/li>&#xa;&lt;/ul>&#xa;&#xa;&lt;/p>&#xa;&lt;/div>&#xa;" htmlState="2" halign="1" margin="1">
+                <LabelFont description="Sans,10,-1,5,50,0,0,0,0,0"/>
+                <FontColor red="0" blue="0" green="0"/>
+                <ComposerItem width="71.4269" x="213.157" transparency="0" y="35.7055" rotation="0" height="62.8801" positionMode="0" frame="false" outlineWidth="0.3" zValue="6" lastValidViewScaleFactor="2.45973" uuid="{417be6b6-5aaa-46c1-abdb-1fe2390fdba6}" id="" background="true" blendMode="0" positionLock="false">
+                    <FrameColor alpha="255" red="0" blue="0" green="0"/>
+                    <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
+                </ComposerItem>
+            </ComposerLabel>
+            <ComposerLabel valign="32" labelText="Squirrel Expansion Study" htmlState="0" halign="1" margin="1">
+                <LabelFont description="FreeSans,24,-1,5,63,0,0,0,0,0"/>
+                <FontColor red="0" blue="0" green="0"/>
+                <ComposerItem width="153.675" x="14.1818" transparency="0" y="13.0095" rotation="0" height="14.2292" positionMode="0" frame="false" outlineWidth="0.3" zValue="5" lastValidViewScaleFactor="2.45973" uuid="{32c3eeec-3e4e-48bb-8cf3-a016fa8ee2a0}" id="" background="true" blendMode="0" positionLock="false">
                     <FrameColor alpha="255" red="0" blue="0" green="0"/>
                     <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
                 </ComposerItem>
@@ -80,7 +117,7 @@
                     <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
                 </ComposerItem>
             </ComposerScaleBar>
-            <ComposerLegend symbolWidth="7" title="Squirrel Habitat Study" boxSpace="2" splitLayer="0" equalColumnWidth="0" map="0" symbolHeight="4" wrapChar="" fontColor="#000000" columnSpace="2" columnCount="1">
+            <ComposerLegend symbolWidth="7" title="" boxSpace="2" splitLayer="0" equalColumnWidth="0" map="0" symbolHeight="4" wrapChar="" fontColor="#000000" columnSpace="2" columnCount="1">
                 <styles>
                     <style marginBottom="2" name="title" font="Sans,16,-1,5,50,0,0,0,0,0"/>
                     <style marginTop="2" name="group" font="Sans,14,-1,5,50,0,0,0,0,0"/>
@@ -133,134 +170,8 @@
                             </symbols>
                         </VectorClassificationItemNg>
                     </LayerItem>
-                    <LayerItem layerId="Buffer20140609142803012" userText="" style="hidden" text="Buffer" showFeatureCount="0">
-                        <VectorClassificationItemNg userText="" text="Buffer">
-                            <symbols>
-                                <symbol alpha="1" type="fill" name="classificationSymbol">
-                                    <layer pass="0" class="SimpleFill" locked="0">
-                                        <prop k="border_width_unit" v="MM"/>
-                                        <prop k="color" v="233,33,93,255"/>
-                                        <prop k="color_border" v="0,0,0,255"/>
-                                        <prop k="offset" v="0,0"/>
-                                        <prop k="offset_unit" v="MM"/>
-                                        <prop k="style" v="solid"/>
-                                        <prop k="style_border" v="solid"/>
-                                        <prop k="width_border" v="0.26"/>
-                                    </layer>
-                                </symbol>
-                            </symbols>
-                        </VectorClassificationItemNg>
-                    </LayerItem>
-                    <LayerItem layerId="buffered20140609151939061" userText="" style="hidden" text="buffered" showFeatureCount="0">
-                        <VectorClassificationItemNg userText="" text="buffered">
-                            <symbols>
-                                <symbol alpha="1" type="fill" name="classificationSymbol">
-                                    <layer pass="0" class="SimpleFill" locked="0">
-                                        <prop k="border_width_unit" v="MM"/>
-                                        <prop k="color" v="117,202,38,255"/>
-                                        <prop k="color_border" v="0,0,0,255"/>
-                                        <prop k="offset" v="0,0"/>
-                                        <prop k="offset_unit" v="MM"/>
-                                        <prop k="style" v="solid"/>
-                                        <prop k="style_border" v="solid"/>
-                                        <prop k="width_border" v="0.26"/>
-                                    </layer>
-                                </symbol>
-                            </symbols>
-                        </VectorClassificationItemNg>
-                    </LayerItem>
-                    <LayerItem layerId="buffered20140609172722098" userText="" style="hidden" text="buffered" showFeatureCount="0">
-                        <VectorClassificationItemNg userText="" text="buffered">
-                            <symbols>
-                                <symbol alpha="1" type="fill" name="classificationSymbol">
-                                    <layer pass="0" class="SimpleFill" locked="0">
-                                        <prop k="border_width_unit" v="MM"/>
-                                        <prop k="color" v="26,73,128,255"/>
-                                        <prop k="color_border" v="0,0,0,255"/>
-                                        <prop k="offset" v="0,0"/>
-                                        <prop k="offset_unit" v="MM"/>
-                                        <prop k="style" v="no"/>
-                                        <prop k="style_border" v="dash"/>
-                                        <prop k="width_border" v="1.26"/>
-                                    </layer>
-                                </symbol>
-                            </symbols>
-                        </VectorClassificationItemNg>
-                    </LayerItem>
-                    <LayerItem layerId="buffered20140609172811390" userText="" style="hidden" text="buffered" showFeatureCount="0">
-                        <VectorClassificationItemNg userText="" text="buffered">
-                            <symbols>
-                                <symbol alpha="1" type="fill" name="classificationSymbol">
-                                    <layer pass="0" class="SimpleFill" locked="0">
-                                        <prop k="border_width_unit" v="MM"/>
-                                        <prop k="color" v="26,73,128,255"/>
-                                        <prop k="color_border" v="0,0,0,255"/>
-                                        <prop k="offset" v="0,0"/>
-                                        <prop k="offset_unit" v="MM"/>
-                                        <prop k="style" v="no"/>
-                                        <prop k="style_border" v="dash"/>
-                                        <prop k="width_border" v="1.26"/>
-                                    </layer>
-                                </symbol>
-                            </symbols>
-                        </VectorClassificationItemNg>
-                    </LayerItem>
-                    <LayerItem layerId="splits_020140609174755764" userText="" style="hidden" text="splits_0" showFeatureCount="0">
-                        <VectorClassificationItemNg userText="" text="splits_0">
-                            <symbols>
-                                <symbol alpha="1" type="fill" name="classificationSymbol">
-                                    <layer pass="0" class="SimpleFill" locked="0">
-                                        <prop k="border_width_unit" v="MM"/>
-                                        <prop k="color" v="80,104,169,255"/>
-                                        <prop k="color_border" v="0,0,0,255"/>
-                                        <prop k="offset" v="0,0"/>
-                                        <prop k="offset_unit" v="MM"/>
-                                        <prop k="style" v="solid"/>
-                                        <prop k="style_border" v="solid"/>
-                                        <prop k="width_border" v="0.26"/>
-                                    </layer>
-                                </symbol>
-                            </symbols>
-                        </VectorClassificationItemNg>
-                    </LayerItem>
-                    <LayerItem layerId="splits_120140609174755773" userText="" style="hidden" text="splits_1" showFeatureCount="0">
-                        <VectorClassificationItemNg userText="" text="splits_1">
-                            <symbols>
-                                <symbol alpha="1" type="fill" name="classificationSymbol">
-                                    <layer pass="0" class="SimpleFill" locked="0">
-                                        <prop k="border_width_unit" v="MM"/>
-                                        <prop k="color" v="74,214,74,255"/>
-                                        <prop k="color_border" v="0,0,0,255"/>
-                                        <prop k="offset" v="0,0"/>
-                                        <prop k="offset_unit" v="MM"/>
-                                        <prop k="style" v="solid"/>
-                                        <prop k="style_border" v="solid"/>
-                                        <prop k="width_border" v="0.26"/>
-                                    </layer>
-                                </symbol>
-                            </symbols>
-                        </VectorClassificationItemNg>
-                    </LayerItem>
-                    <LayerItem layerId="conflicts20140610115717068" userText="" style="hidden" text="conflicts" showFeatureCount="0">
-                        <VectorClassificationItemNg userText="" text="conflicts">
-                            <symbols>
-                                <symbol alpha="1" type="fill" name="classificationSymbol">
-                                    <layer pass="0" class="SimpleFill" locked="0">
-                                        <prop k="border_width_unit" v="MM"/>
-                                        <prop k="color" v="89,159,48,255"/>
-                                        <prop k="color_border" v="0,0,0,255"/>
-                                        <prop k="offset" v="0,0"/>
-                                        <prop k="offset_unit" v="MM"/>
-                                        <prop k="style" v="solid"/>
-                                        <prop k="style_border" v="solid"/>
-                                        <prop k="width_border" v="0.26"/>
-                                    </layer>
-                                </symbol>
-                            </symbols>
-                        </VectorClassificationItemNg>
-                    </LayerItem>
                 </Model>
-                <ComposerItem width="67.3" x="215.471" transparency="0" y="36.9959" rotation="0" height="87.4" positionMode="0" frame="false" outlineWidth="0.3" zValue="2" lastValidViewScaleFactor="2.45973" uuid="{d8d3d915-5ae3-4f30-a077-6781b13be19d}" id="" background="true" blendMode="0" positionLock="false">
+                <ComposerItem width="22.4" x="213.157" transparency="0" y="116.558" rotation="0" height="23.4" positionMode="0" frame="false" outlineWidth="0.3" zValue="2" lastValidViewScaleFactor="2.45973" uuid="{d8d3d915-5ae3-4f30-a077-6781b13be19d}" id="" background="true" blendMode="0" positionLock="false">
                     <FrameColor alpha="255" red="0" blue="0" green="0"/>
                     <BackgroundColor alpha="255" red="255" blue="255" green="255"/>
                 </ComposerItem>
@@ -919,7 +830,7 @@
                 <edittype labelontop="0" editable="1" type="0" name="species"/>
                 <edittype labelontop="0" editable="1" type="0" name="species_2"/>
             </edittypes>
-            <editform></editform>
+            <editform>.</editform>
             <editforminit></editforminit>
             <annotationform>.</annotationform>
             <editorlayout>generatedlayout</editorlayout>
@@ -995,9 +906,9 @@
                 <multilineenabled fieldname="" on=""/>
                 <selectedonly on=""/>
             </labelattributes>
-            <editform></editform>
+            <editform>.</editform>
             <editforminit></editforminit>
-            <annotationform></annotationform>
+            <annotationform>.</annotationform>
             <editorlayout>generatedlayout</editorlayout>
             <excludeAttributesWMS/>
             <excludeAttributesWFS/>
@@ -1071,9 +982,9 @@
                 <multilineenabled fieldname="" on=""/>
                 <selectedonly on=""/>
             </labelattributes>
-            <editform></editform>
+            <editform>.</editform>
             <editforminit></editforminit>
-            <annotationform></annotationform>
+            <annotationform>.</annotationform>
             <editorlayout>generatedlayout</editorlayout>
             <excludeAttributesWMS/>
             <excludeAttributesWFS/>

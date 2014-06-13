@@ -191,6 +191,10 @@ samples.bar(99)
 
 from samples import baz
 baz(100)
+
+# if I edit samples.py....
+
+reload(samples)
 </code>
 </pre>
   </div>

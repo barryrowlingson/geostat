@@ -230,7 +230,12 @@ def baz(x):
 &gt;&gt;&gt;  
 &gt;&gt;&gt;  from samples import baz
 &gt;&gt;&gt;  baz(100)
-300</code>
+300
+&gt;&gt;&gt;  
+&gt;&gt;&gt;  # if I edit samples.py....
+&gt;&gt;&gt;  
+&gt;&gt;&gt;  reload(samples)
+&lt;module 'samples' from '/home/rowlings/Work/Teaching/GeostatSummerSchool/2014/Site/geostat/samples.pyc'&gt;</code>
 </pre>
 </div>
 <div class="slide">
@@ -480,8 +485,8 @@ split(...)
 &gt;&gt;&gt;  np.sin([1,2,3])
 array([ 0.84147098,  0.90929743,  0.14112001])
 &gt;&gt;&gt;  np.random.poisson(10,20)
-array([ 6,  4, 11, 13, 11,  8,  8,  8, 10,  8,  9,  5,  3, 11,  6,  5,  9,
-       11,  9,  7])</code>
+array([11, 12, 10,  8, 13, 11, 14, 10, 10, 13,  7, 15,  8, 12, 10, 10,  8,
+        6, 11, 11])</code>
 </pre>
  <pre>
 <code class="language-python" id="numpy2">&gt;&gt;&gt;  m = np.matrix([[1,2], [3,4]])
@@ -973,7 +978,7 @@ array([ 0.56778845,  0.70374966, -0.51771761, -0.19487455, -0.17114584])</code>
  <pre>
 <code class="language-python" id="imap">&gt;&gt;&gt;  spdf['I']=lm.Is
 &gt;&gt;&gt;  spdf.plot(column="I")
-&lt;matplotlib.axes.AxesSubplot object at 0x68d3bd0&gt;
+&lt;matplotlib.axes.AxesSubplot object at 0x60dbc10&gt;
 &gt;&gt;&gt;  plt.show()</code>
 </pre>
  <div class="cimage">
