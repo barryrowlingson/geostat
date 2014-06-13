@@ -480,8 +480,8 @@ split(...)
 &gt;&gt;&gt;  np.sin([1,2,3])
 array([ 0.84147098,  0.90929743,  0.14112001])
 &gt;&gt;&gt;  np.random.poisson(10,20)
-array([14,  9,  5, 10, 10, 12, 10, 12,  5, 14, 12,  7,  9,  7,  7,  8, 11,
-        8, 11, 11])</code>
+array([ 6,  4, 11, 13, 11,  8,  8,  8, 10,  8,  9,  5,  3, 11,  6,  5,  9,
+       11,  9,  7])</code>
 </pre>
  <pre>
 <code class="language-python" id="numpy2">&gt;&gt;&gt;  m = np.matrix([[1,2], [3,4]])
@@ -512,6 +512,97 @@ matrix([[  1.00000000e+00,   0.00000000e+00],
 &gt;&gt;&gt;  d = great_circle(points[0].coord(), points[1].coord())
 &gt;&gt;&gt;  d
 Distance(0.0832555738102)
+&gt;&gt;&gt;  help(d)
+Help on great_circle in module geopy.distance object:
+
+class great_circle(Distance)
+ |  Use spherical geometry to calculate the surface distance between two
+ |  geodesic points. This formula can be written many different ways,
+ |  including just the use of the spherical law of cosines or the haversine
+ |  formula.
+ |  
+ |  Set which radius of the earth to use by specifying a 'radius' keyword
+ |  argument. It must be in kilometers. The default is to use the module
+ |  constant `EARTH_RADIUS`, which uses the average great-circle radius.
+ |  
+ |  Example::
+ |  
+ |      &gt;&gt;&gt; from geopy.distance import great_circle
+ |      &gt;&gt;&gt; newport_ri = (41.49008, -71.312796)
+ |      &gt;&gt;&gt; cleveland_oh = (41.499498, -81.695391)
+ |      &gt;&gt;&gt; great_circle(newport_ri, cleveland_oh).miles
+ |      537.1485284062816
+ |  
+ |  Method resolution order:
+ |      great_circle
+ |      Distance
+ |      __builtin__.object
+ |  
+ |  Methods defined here:
+ |  
+ |  __init__(self, *args, **kwargs)
+ |  
+ |  destination(self, point, bearing, distance=None)
+ |      TODO docs.
+ |  
+ |  measure(self, a, b)
+ |  
+ |  ----------------------------------------------------------------------
+ |  Methods inherited from Distance:
+ |  
+ |  __abs__(self)
+ |  
+ |  __add__(self, other)
+ |  
+ |  __bool__ = __nonzero__(self)
+ |  
+ |  __cmp__(self, other)
+ |  
+ |  __div__(self, other)
+ |  
+ |  __mul__(self, other)
+ |  
+ |  __neg__(self)
+ |  
+ |  __nonzero__(self)
+ |  
+ |  __repr__(self)
+ |  
+ |  __str__(self)
+ |  
+ |  __sub__(self, other)
+ |  
+ |  __truediv__ = __div__(self, other)
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors inherited from Distance:
+ |  
+ |  __dict__
+ |      dictionary for instance variables (if defined)
+ |  
+ |  __weakref__
+ |      list of weak references to the object (if defined)
+ |  
+ |  feet
+ |  
+ |  ft
+ |  
+ |  kilometers
+ |  
+ |  km
+ |  
+ |  m
+ |  
+ |  meters
+ |  
+ |  mi
+ |  
+ |  miles
+ |  
+ |  nautical
+ |  
+ |  nm
+
 &gt;&gt;&gt;  
 &gt;&gt;&gt;  d.meters
 83.255573810242
@@ -611,16 +702,16 @@ OrderedDict([(u'ADMIN_NAME', u'Greater London'), (u'AREA', 0.208), (u'PERIMETER'
 &gt;&gt;&gt;  width = 10000
 &gt;&gt;&gt;  
 &gt;&gt;&gt;  def bufferinout(input_shp, output_shp, width):
-...      with fiona.open(input_shp, "r") as input:
-...          schema = { 'geometry': 'Polygon', 'properties': { 'name': 'str' } }
-...          with fiona.open(output_shp, "w", "ESRI Shapefile", schema, crs = input.crs) as output:
-...              for feature in input:
-...                  output.write({
-...                  'properties': {
-...                      'name': feature['properties']['ADMIN_NAME']
-...                  },
-...                  'geometry': mapping(shape(feature['geometry']).buffer(width))
-...                  })
+...      input = fiona.open(input_shp, "r")
+...      schema = { 'geometry': 'Polygon', 'properties': { 'name': 'str' } }
+...      output =  fiona.open(output_shp, "w", "ESRI Shapefile", schema, crs = input.crs)
+...      for feature in input:
+...           output.write({
+...           'properties': {
+...               'name': feature['properties']['ADMIN_NAME']
+...           },
+...           'geometry': mapping(shape(feature['geometry']).buffer(width))
+...           })
 ...  
 &gt;&gt;&gt;  bufferinout(input_shp, output_shp, width)</code>
 </pre>
@@ -882,7 +973,7 @@ array([ 0.56778845,  0.70374966, -0.51771761, -0.19487455, -0.17114584])</code>
  <pre>
 <code class="language-python" id="imap">&gt;&gt;&gt;  spdf['I']=lm.Is
 &gt;&gt;&gt;  spdf.plot(column="I")
-&lt;matplotlib.axes.AxesSubplot object at 0x6155090&gt;
+&lt;matplotlib.axes.AxesSubplot object at 0x68d3bd0&gt;
 &gt;&gt;&gt;  plt.show()</code>
 </pre>
  <div class="cimage">
