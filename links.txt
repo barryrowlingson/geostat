@@ -1,7 +1,10 @@
-http://chicas-lancaster.github.io/
-http://barry.rowlingson.com/
-http://barryrowlingson.github.io/geostat/
-http://msysgit.github.io/
-http://software-carpentry.org/
-http://www.qgis.org
+<h1>Links</h1>
+<ul>
+<li><a href="http://chicas-lancaster.github.io/">http://chicas-lancaster.github.io/</a></li>
+<li><a href="http://barry.rowlingson.com/">me</a<</li>
+<li><a href="http://barryrowlingson.github.io/geostat/">notes</a></li>
+<li><a href="http://msysgit.github.io/">git/bash windows</a></li>
+<li><a href="http://software-carpentry.org/">software carpentry</a></li>
+<li><a href="http://www.qgis.org">qgis</a></li>
+</ul>
 
